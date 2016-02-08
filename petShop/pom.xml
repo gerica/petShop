@@ -26,9 +26,34 @@
 		<!-- Spring -->
 		<spring-framework.version>4.1.6.RELEASE</spring-framework.version>
 		<spring-framework-data.version>1.8.0.RELEASE</spring-framework-data.version>
+
+		<!-- Servlet -->
+		<servlet.version>2.5</servlet.version>
+
+		<!-- Postgresql -->
+		<postgres.version>9.1-901.jdbc4</postgres.version>
+
+		<!-- Logging -->
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+
+		<!-- Apache Commons Lang -->
+		<apache.commons.lang.version>3.3.2</apache.commons.lang.version>
+
+		<!-- JODA TIME -->
+		<joda-time.version>2.7</joda-time.version>
+
 	</properties>
 
 	<dependencies>
+
+		<!-- SERVLET -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Jersey -->
 		<dependency>
@@ -63,11 +88,11 @@
 			<version>${spring-framework.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>2.5.6.SEC02</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-aop</artifactId> -->
+		<!-- <version>2.5.6.SEC02</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -101,7 +126,50 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-context</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<!-- PostgreSQL JDBC Driver -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgres.version}</version>
+		</dependency>
+
+		<!-- Apache Commons Lang -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${apache.commons.lang.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
 		</dependency>
 
 	</dependencies>
