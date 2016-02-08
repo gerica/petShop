@@ -1,0 +1,1 @@
+var appAutenticacao = angular.module("autenticacaoSeg", ["ngRoute"]);
