@@ -42,17 +42,23 @@ appAutenticacao.directive('notification', [
  * notification.type = 'info';"> Show </button>
  */
 
-appAutenticacao.directive('myDirective', function() {
+appAutenticacao.directive('alertaMensagem', function() {
 	return {
 		restrict : 'EACM',
 		replace : true,
+		transclude: true,
 		scope : {
-			classCss : '=', // binding strategy
-			descricao : '=', // binding strategy
-			close : '&'
+			'classCss' : '=', // binding strategy
+			'descricao' : '=', // binding strategy
+			'close' : '&onClose'
 		},
-		templateUrl : 'petShop/pages/alerta.html'
-			
+		templateUrl : 'petShop/pages/alerta.html',
+		link : function(scope, elem, attr, ctrl) {
+			elem.bind('click', function(e) {
+				e.stopPropagation();
+			});
+		}
+
 	}
 });
 appAutenticacao.directive('navigation', function() {

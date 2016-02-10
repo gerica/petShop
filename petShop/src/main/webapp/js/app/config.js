@@ -24,9 +24,9 @@ appAutenticacao.config(function($routeProvider, $locationProvider, $logProvider)
 	}).when("/tamplateSite", {
 		templateUrl : "petShop/pages/tamplateSite.html",
 		controller : "tamplateSiteController"
-	}).when("/petCaoForm", {
+	}).when("/clienteForm", {
 		templateUrl : "petShop/pages/cliente/form.html",
-		controller : "petCaoController"
+		controller : "clienteController"
 	}).when("/petCaoForm", {
 		templateUrl : "petShop/pages/pet/cao/form.html",
 		controller : "petCaoController"

@@ -5,7 +5,6 @@ appAutenticacao.controller("loginController", function($scope, $log, $location, 
 	$scope.alertMessage;
 	//
 	$scope.closeAlert = function() {
-		$log.debug("aqui.");
 		$scope.showAlert = false;
 	};
 
@@ -71,14 +70,28 @@ appAutenticacao.controller("petCaoController", function($scope, $log) {
 	$log.info("Iniciando petCaoController");
 });
 
-appAutenticacao.controller("clienteCaoController", function($scope, $log) {
-	$log.info("Iniciando clienteCaoController");
-	$scope.logar = function(cliente) {
-		if (validarForm(cliente)) {
+appAutenticacao.controller("clienteController", function($scope, $log, autencicacaoHttpFacade) {
+	$log.info("Iniciando clienteController");
+	$scope.showAlert = false;
+	$scope.classCssValor;
+	$scope.alertMessage;
 
+	//
+	$scope.closeAlert = function() {
+		$scope.showAlert = false;
+	};
+
+	$scope.salvar = function(cliente) {
+		if ($scope.formCliente.$valid) {
 			autencicacaoHttpFacade.incluirCliente(cliente).success(function(data, status, headers, config) {
 				$log.info("Cliente inserido.");
-//				$location.path("/tamplateSite");
+				$scope.showAlert = true;
+				$scope.classCssValor = "alert alert-success";
+				$scope.alertMessage = "Operação realizada com suesso.";
+				$scope.formCliente.$setPristine();
+				limparForm(cliente);
+
+				// $location.path("/tamplateSite");
 			}).error(function(data, status, headers, config) {
 				switch (status) {
 					case 401: {
@@ -97,6 +110,19 @@ appAutenticacao.controller("clienteCaoController", function($scope, $log) {
 				console.log("erro-----------------");
 				console.log(data, status);
 			});
+		} else {
+			$scope.showAlert = true;
+			$scope.classCssValor = "alert alert-warning";
+			$scope.alertMessage = "Informe os campos.";
+			
+			$scope.formCliente.nome.$setDirty(true);
+			$scope.formCliente.sobreNome.$setDirty(true);
+			$scope.formCliente.dtNacimento.$setDirty(true);
+		}
+	};
+	var limparForm = function(cliente) {
+		for ( var key in cliente) {
+			delete $scope.cliente[key];
 		}
 	};
 
