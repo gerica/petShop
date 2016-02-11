@@ -1,1 +1,3 @@
-var appAutenticacao = angular.module("autenticacaoSeg", ["ngRoute"]);
+var appAutenticacao = angular.module("autenticacaoSeg", [
+		"ngRoute", "ui.router"
+]);
