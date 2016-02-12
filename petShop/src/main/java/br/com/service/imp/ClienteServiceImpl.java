@@ -1,7 +1,9 @@
 package br.com.service.imp;
 
-import java.util.Collection;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,14 @@ import br.com.service.ClienteService;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
+	private static final Logger logger = LoggerFactory.getLogger(ClienteServiceImpl.class);
 
 	@Autowired
 	private ClienteRepository clienteRepository;
 
 	@Override
 	public void incluir(Cliente cliente) {
+		logger.info("ClienteServiceImpl.incluir()");
 		clienteRepository.save(cliente);
 	}
 
@@ -27,13 +31,13 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public Cliente buscarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Cliente> findAll() {
+		logger.info("ClienteServiceImpl.findAll()");
+		return (List<Cliente>) clienteRepository.findAll();
 	}
 
 	@Override
-	public Collection<Cliente> buscarTodos() {
+	public Cliente findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

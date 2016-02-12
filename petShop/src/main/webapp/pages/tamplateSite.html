@@ -1,14 +1,14 @@
 <!-- Custom Theme JavaScript -->
-<script src="petShop/js/dist/js/sb-admin-2.js"></script>
+<script src="js/dist/js/sb-admin-2.js"></script>
 
-<div id="wrapper">
+<div id="wrapper" ng-controller="tamplateSiteController">
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">PetShop</a>
+			<a class="navbar-brand" href="/petShop">PetShop</a>
 		</div>
 		<!-- /.navbar-header -->
 
@@ -132,7 +132,7 @@
 					<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
 					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
 					<li class="divider"></li>
-					<li><a href="/"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+					<li><a href="pages/login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
 				</ul> <!-- /.dropdown-user --></li>
 			<!-- /.dropdown -->
 		</ul>
@@ -150,12 +150,12 @@
 							</span>
 						</div> <!-- /input-group -->
 					</li>
-					<li><a href="/"><i class="fa fa-dashboard fa-fw"></i> Painel Central</a></li>
-					<li><a href="#" ng-click="selectedTemplate.path = 'petShop/pages/cliente/form.html'"><i class="fa fa-edit fa-fw"></i>
+					<li><a href="/petShop"><i class="fa fa-dashboard fa-fw"></i> Painel Central</a></li>
+					<li><a href="#" ng-click="selectedTemplate.path = 'pages/cliente/form.html'"><i class="fa fa-edit fa-fw"></i>
 							Cliente</a></li>
 					<li><a href="#"><i class="fa fa-edit fa-fw"></i> Pet<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#" ng-click="selectedTemplate.path = 'petShop/pages/pet/cao/form.html'">Cachorro</a></li>
+							<li><a href="#" ng-click="selectedTemplate.path = 'pages/pet/cao/form.html'">Cachorro</a></li>
 							<li><a href="morris.html">Gato</a></li>
 						</ul> <!-- /.nav-second-level --></li>
 				</ul>

@@ -52,7 +52,7 @@ appAutenticacao.directive('alertaMensagem', function() {
 			'descricao' : '=', // binding strategy
 			'close' : '&onClose'
 		},
-		templateUrl : 'petShop/pages/alerta.html',
+		templateUrl : 'pages/alerta.html',
 		link : function(scope, elem, attr, ctrl) {
 			elem.bind('click', function(e) {
 				e.stopPropagation();

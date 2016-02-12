@@ -23,6 +23,9 @@ public class Cliente {
 	@Column(name = "ds_sobre_nome", nullable = true, length = 255)
 	private String sobreNome;
 
+	@Column(name = "ds_email", nullable = true, length = 255)
+	private String email;
+
 	@Column(name = "dtNacimento")
 	private Date dtNacimento;
 
@@ -56,6 +59,14 @@ public class Cliente {
 
 	public void setDtNacimento(Date dtNacimento) {
 		this.dtNacimento = dtNacimento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

@@ -8,7 +8,7 @@
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#cadastro" data-toggle="tab">Cadastro</a></li>
-		<li><a href="#lista" data-toggle="tab">Lista</a></li>
+		<li><a href="#lista" data-toggle="tab" ng-click="findAllCliente()">Lista</a></li>
 	</ul>
 	<!-- / Nav tabs -->
 	<div class="tab-content">
@@ -54,6 +54,15 @@
 										</div>
 									</div>
 								</div>
+								<div class="col-lg-4">
+									<div class="form-group" ng-class="{'has-error': formCliente.email.$dirty && formCliente.email.$invalid}">
+										<label ng-class="{'control-label': formCliente.email.$dirty && formCliente.email.$invalid}">Email:</label>
+										<input class="form-control" type="email" name="email" ng-model="cliente.email" required />
+										<div class="alert alert-danger" ng-show="formCliente.email.$dirty && formCliente.email.$invalid">
+											<small ng-show="formCliente.email.$error"> O email é invalido. </small>
+										</div>
+									</div>
+								</div>
 							</div>
 							<!-- /.row (nested) -->
 						</div>
@@ -69,14 +78,16 @@
 		</div>
 		<div class="tab-pane fade" id="lista">
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="well" ui-view></div>        
+				<div class="col-md-12">
+					<form class="form-inline well well-sm">
+						<span class="fa fa-search"></span>
+						<div class="form-group">
+							<input type="text" class="form-control" id="search" ng-model="search" placeholder="Pesquisar..." />
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
+			<div ng-include src="'pages/cliente/lista.html'"></div>
 		</div>
 	</div>
 	<!-- /.row -->

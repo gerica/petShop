@@ -1,6 +1,6 @@
 package br.com.service;
 
-import java.util.Collection;
+import java.util.List;
 
 import br.com.entidade.Cliente;
 
@@ -10,8 +10,8 @@ public interface ClienteService {
 
 	void alterar(Cliente cliente);
 
-	Cliente buscarPorId(Integer id);
+	Cliente findById(Integer id);
 
-	Collection<Cliente> buscarTodos();
+	List<Cliente> findAll();
 
 }
