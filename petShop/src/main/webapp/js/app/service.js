@@ -26,10 +26,17 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		});
 	};
 
+	var _findAllRaca = function(val) {
+		return $http.get("/petShop/rest/petShopRest/findAllRaca").then(function(response) {
+			return response;
+		});
+	};
+
 	return {
 		login : _login,
 		incluirCliente : _incluirCliente,
 		findAllCliente : _findAllCliente,
 		findCliente : _findCliente,
+		findAllRaca : _findAllRaca,
 	};
 });

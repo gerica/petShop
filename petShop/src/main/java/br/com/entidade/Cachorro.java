@@ -1,22 +1,21 @@
 package br.com.entidade;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "cachorro")
+public class Cachorro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -25,17 +24,16 @@ public class Cliente {
 	@Column(name = "ds_nome", nullable = true, length = 255)
 	private String nome;
 
-	@Column(name = "ds_sobre_nome", nullable = true, length = 255)
-	private String sobreNome;
-
-	@Column(name = "ds_email", nullable = true, length = 255)
-	private String email;
-
 	@Column(name = "dtNacimento")
 	private Date dtNacimento;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", cascade = CascadeType.ALL)
-	private Set<Cachorro> cachorro;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_raca")
+	private Raca raca;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private Cliente cliente;
 
 	public Integer getId() {
 		return id;
@@ -53,14 +51,6 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getSobreNome() {
-		return sobreNome;
-	}
-
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
-	}
-
 	public Date getDtNacimento() {
 		return dtNacimento;
 	}
@@ -69,12 +59,20 @@ public class Cliente {
 		this.dtNacimento = dtNacimento;
 	}
 
-	public String getEmail() {
-		return email;
+	public Raca getRaca() {
+		return raca;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setRaca(Raca raca) {
+		this.raca = raca;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }
