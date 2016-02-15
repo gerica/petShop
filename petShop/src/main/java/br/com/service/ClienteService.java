@@ -13,5 +13,7 @@ public interface ClienteService {
 	Cliente findById(Integer id);
 
 	List<Cliente> findAll();
+	
+	List<Cliente> findByValor(String valor);
 
 }

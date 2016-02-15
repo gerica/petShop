@@ -1,3 +1,3 @@
 var appAutenticacao = angular.module("autenticacaoSeg", [
-	"ui.router"
+		"ui.router", "ui.bootstrap"
 ]);

@@ -38,8 +38,13 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente findById(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Cliente> findByValor(String valor) {
+		logger.info("ClienteServiceImpl.findByValor()");
+		return clienteRepository.findByNomeContainingIgnoreCase(valor);
 	}
 
 }

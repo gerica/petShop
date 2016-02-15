@@ -33,20 +33,11 @@ appAutenticacao.directive('notification', [
 		}
 ]);
 
-/*
- * <div class="alert alert-{{notification.type}}" style="display: none;"
- * role="alert"
- * data-notification="{{notification.status}}">{{notification.message}} </div>
- * <button id="submit" name="submit" class="btn btn-default" type="submit"
- * ng-click="notification.status = 'show'; notification.message = 'Oh yeah!';
- * notification.type = 'info';"> Show </button>
- */
-
 appAutenticacao.directive('alertaMensagem', function() {
 	return {
 		restrict : 'EACM',
 		replace : true,
-		transclude: true,
+		transclude : true,
 		scope : {
 			'classCss' : '=', // binding strategy
 			'descricao' : '=', // binding strategy
@@ -68,4 +59,33 @@ appAutenticacao.directive('navigation', function() {
 		replace : true
 
 	}
+});
+
+// appAutenticacao.directive('autoComplete', function($timeout) {
+// return function(scope, iElement, iAttrs) {
+// iElement.autocomplete({
+// source : scope[iAttrs.uiItems],
+// select : function() {
+// $timeout(function() {
+// iElement.trigger('input');
+// }, 0);
+// }
+// });
+// };
+// });
+
+appAutenticacao.directive('autoComplete', function(autoCompleteDataService) {
+	return {
+		restrict : 'A',
+		link : function(scope, elem, attr, ctrl) {
+			// elem is a jquery lite object if jquery is not present,
+			// but with jquery and jquery ui, it will be a full jquery object.
+			debugger
+			elem.autocomplete({
+				source : autoCompleteDataService.getSource(), // from your
+																// service
+				minLength : 2
+			});
+		}
+	};
 });

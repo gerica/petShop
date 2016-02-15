@@ -11,9 +11,25 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		});
 	};
 
+	var _findCliente = function(val) {
+		return $http.get("/petShop/rest/clienteRest/findByValor", {
+			params : {
+				valor : val,
+			}
+		}).then(function(response) {
+			return response.data.map(function(item) {
+				return {
+					cliente : item,
+					nomeCompleto : item.nome + " " + item.sobreNome
+				};
+			});
+		});
+	};
+
 	return {
 		login : _login,
 		incluirCliente : _incluirCliente,
-		findAllCliente : _findAllCliente
+		findAllCliente : _findAllCliente,
+		findCliente : _findCliente,
 	};
 });
