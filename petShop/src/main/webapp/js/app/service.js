@@ -18,10 +18,11 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 			}
 		}).then(function(response) {
 			return response.data.map(function(item) {
-				return {
-					cliente : item,
-					nomeCompleto : item.nome + " " + item.sobreNome
-				};
+				return item;
+//				{
+//					cliente : item,
+//					nomeCompleto : item.nome + " " + item.sobreNome
+//				};
 			});
 		});
 	};
@@ -32,11 +33,23 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		});
 	};
 
+	var _incluirCachorro = function(cliente) {
+		return $http.post("/petShop/rest/cachorroRest/incluir", cliente);
+	};
+
+	var _findAllCachorro = function() {
+		return $http.get("/petShop/rest/cachorroRest/findAllCachorro", {
+			cache : false
+		});
+	};
+
 	return {
 		login : _login,
 		incluirCliente : _incluirCliente,
 		findAllCliente : _findAllCliente,
 		findCliente : _findCliente,
 		findAllRaca : _findAllRaca,
+		incluirCachorro : _incluirCachorro,
+		findAllCachorro : _findAllCachorro,
 	};
 });

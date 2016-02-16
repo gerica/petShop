@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Dados do Proprietario</div>
+							<div class="panel-heading">Dados do ProprietÃ¡rio</div>
 							<div class="panel-body">
 								<div class="col-lg-4">
 									<div class="form-group" ng-class="{'has-error': formCliente.nome.$dirty && formCliente.nome.$invalid}">
@@ -27,8 +27,8 @@
 										<input class="form-control" type="text" placeholder="Nome" name="nome" ng-model="cliente.nome" ng-minlength=3 ng-maxlength=100 required />
 										<div class="alert alert-danger" ng-show="formCliente.nome.$dirty && formCliente.nome.$invalid ">
 											<small ng-show="formCliente.nome.$error.required"> Informe o nome. </small>
-											<small ng-show="formCliente.nome.$error.minlength"> O nome deverá ter mais que três letras. </small>
-											<small ng-show="formCliente.nome.$error.maxlength"> O nome não poderá ter mais que cem letras. </small>
+											<small ng-show="formCliente.nome.$error.minlength"> O nome deverÃ¡ ter mais que trÃªs letras. </small>
+											<small ng-show="formCliente.nome.$error.maxlength"> O nome nÃ£o poderÃ¡ ter mais que cem letras. </small>
 										</div>
 									</div>
 								</div>
@@ -39,8 +39,8 @@
 											ng-maxlength=100 required />
 										<div class="alert alert-danger" ng-show="formCliente.sobreNome.$dirty && formCliente.sobreNome.$invalid">
 											<small ng-show="formCliente.sobreNome.$error.required"> Informe o sobreNome. </small>
-											<small ng-show="formCliente.sobreNome.$error.minlength"> O sobreNome deverá ter mais que três letras. </small>
-											<small ng-show="formCliente.sobreNome.$error.maxlength"> O sobreNome não poderá ter mais que cem letras. </small>
+											<small ng-show="formCliente.sobreNome.$error.minlength"> O sobreNome deverÃ¡ ter mais que trÃªs letras. </small>
+											<small ng-show="formCliente.sobreNome.$error.maxlength"> O sobreNome nï¿½o poderÃ¡ ter mais que cem letras. </small>
 										</div>
 
 									</div>
@@ -50,7 +50,7 @@
 										<label ng-class="{'control-label': formCliente.dtNacimento.$dirty && formCliente.dtNacimento.$invalid}">Data Nacimento:</label>
 										<input class="form-control" type="date" name="dtNacimento" ng-model="cliente.dtNacimento" required />
 										<div class="alert alert-danger" ng-show="formCliente.dtNacimento.$dirty && formCliente.dtNacimento.$invalid">
-											<small ng-show="formCliente.dtNacimento.$error"> A data de nacimento é invalida. </small>
+											<small ng-show="formCliente.dtNacimento.$error"> A data de nacimento Ã© invalida. </small>
 										</div>
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 										<label ng-class="{'control-label': formCliente.email.$dirty && formCliente.email.$invalid}">Email:</label>
 										<input class="form-control" type="email" name="email" ng-model="cliente.email" required />
 										<div class="alert alert-danger" ng-show="formCliente.email.$dirty && formCliente.email.$invalid">
-											<small ng-show="formCliente.email.$error"> O email é invalido. </small>
+											<small ng-show="formCliente.email.$error"> O email Ã© invalido. </small>
 										</div>
 									</div>
 								</div>
@@ -123,12 +123,9 @@
 										</tr>
 									</tbody>
 								</table>
-								<div class="col-sm-6" ng-show="clientesFiltrados != 0">
-									<!-- 									<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">{{currentPage}} de {{(clientes.length / itemsPerPage | number:0)}}</div> -->
-								</div>
-								<div class="col-sm-6" ng-show="clientesFiltrados != 0">
-									<pagination boundary-links="true" max-size="10" items-per-page="itemsPerPage" total-items="clientes.length" ng-model="currentPage"
-										ng-change="pageChanged()"></pagination>
+								<div class="col-md-6 col-md-offset-4" ng-show="clientesFiltrados != 0">
+									<uib-pagination boundary-links="true" total-items="clientes.length" ng-model="currentPage" items-per-page="itemsPerPage"
+													class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 								</div>
 							</div>
 						</div>

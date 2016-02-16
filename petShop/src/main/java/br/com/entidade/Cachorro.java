@@ -27,7 +27,7 @@ public class Cachorro {
 	@Column(name = "dtNacimento")
 	private Date dtNacimento;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_raca")
 	private Raca raca;
 

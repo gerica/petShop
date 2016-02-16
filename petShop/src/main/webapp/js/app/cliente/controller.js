@@ -58,31 +58,18 @@ appAutenticacao.controller("clienteController", function($scope, $log, autencica
 
 	// FUNCIONALIDADES DA LISTA
 	$log.info("Iniciando listaClienteController");
-	$scope.search = "";
-	$scope.order = "nome";
-	$scope.tipoOrderAsc = true;
-	$scope.selectedIndex = null;
-	$scope.selectedCliente = null;
-
-	$scope.filteredCliente = [];
-	$scope.itemsPerPage = 5;
+	$scope.itemsPerPage = 10;
 	$scope.currentPage = 1;
-
-	// $scope.figureOutTodosToDisplay = function() {
-	// var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-	// var end = begin + $scope.itemsPerPage;
-	// if ($scope.clientes) {
-	// $scope.filteredCliente = $scope.clientes.slice(begin, end);
-	// }
-	// };
 
 	$scope.figureOutTodosToDisplay = function(cliente, index) {
 		var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
 		var end = begin + $scope.itemsPerPage;
-		if (index >= begin && index <= end) {
+
+		if (index >= begin && index < end) {
 			return true;
 		}
 		return false;
+
 	};
 
 	$scope.pageChanged = function() {
@@ -107,8 +94,6 @@ appAutenticacao.controller("clienteController", function($scope, $log, autencica
 		$log.info("parkingHttpFacade.findAllCliente()");
 		autencicacaoHttpFacade.findAllCliente().success(function(data, status, headers, config) {
 			$scope.clientes = data;
-			// $scope.figureOutTodosToDisplay();
-			// $log.info("clientes "+$scope.clientes);
 		}).error(function(data, status, headers, config) {
 			switch (status) {
 				case 401: {

@@ -32,7 +32,7 @@ public class ClienteRest {
 	@POST
 	@Path(PATH_CLIENTE_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response login(Cliente cliente) {
+	public Response incluir(Cliente cliente) {
 		clienteService.incluir(cliente);
 		return Response.status(200).build();
 	}
