@@ -81,8 +81,8 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 
 	$scope.setCachorro = function(cachorro, index) {
 		$scope.selectedIndex = index;
-		$scope.selectedCachorro = cachorro;
-		$scope.open('lg', $scope.selectedCachorro);
+		//$scope.selectedCachorro = cachorro;
+		$scope.open('lg', cachorro);
 	};
 
 	$scope.sensitiveSearch = function(cachorro) {
@@ -105,8 +105,6 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 	$scope.findAllCachorro();
 
 	// funcionalidade de modal
-	$scope.items = ['item1', 'item2', 'item3'];
-
 	$scope.open = function (size, cachorro) {
 
 		var modalInstance = $uibModal.open({
@@ -121,8 +119,10 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 			}
 		});
 
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
+		modalInstance.result.then(function (cachorro) {
+			$scope.selectedCachorro = cachorro;		
+			$('#idTabPet a[href="#cadastro"]').tab('show');
+			
 		}, function () {
 			$log.info('Modal dismissed at: ' + new Date());
 		});
@@ -134,7 +134,6 @@ appAutenticacao.controller('modalDetalheCachorroController', function ($scope, $
 	$scope.cachorro = cachorro;
 
 	$scope.alterar = function () {
-		$log.info($scope);
 		$uibModalInstance.close($scope.cachorro);
 	};
 
