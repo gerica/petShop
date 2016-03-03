@@ -1,69 +1,65 @@
-appAutenticacao.controller("clienteController", function($scope, $log, autencicacaoHttpFacade) {
+appAutenticacao.controller("clienteController", function($uibModal, $log, autencicacaoHttpFacade) {
+	var self = this;
+	
+	// FUNCIONALIDADE DA TAB
+	self.tab = 'first';
+	self.openTab = function (tab) {
+        self.tab = tab;
+    };
+	
 	// FUNCTIONALIDADE DE CADASTRO
 	$log.info("Iniciando clienteController");
-	$scope.showAlert = false;
-	$scope.classCssValor;
-	$scope.alertMessage;
-
-	//
-	$scope.closeAlert = function() {
-		$scope.showAlert = false;
+	
+	self.alerts = [];
+	self.addAlert = function(type, msg) {
+		self.alerts.push({
+			msg : msg,
+			type : type
+		});
+	};
+	self.closeAlert = function(index) {
+		self.alerts.splice(index, 1);
 	};
 
-	$scope.salvar = function(cliente) {
-		if ($scope.formCliente.$valid) {
-			autencicacaoHttpFacade.incluirCliente(cliente).success(function(data, status, headers, config) {
+	self.salvar = function() {
+		self.closeAlert(0);
+		if (self.formCliente.$valid) {
+			autencicacaoHttpFacade.incluirCliente(self.cliente).success(function(data, status, headers, config) {
 				$log.info("Cliente inserido.");
-				$scope.showAlert = true;
-				$scope.classCssValor = "alert alert-success";
-				$scope.alertMessage = "Operação realizada com suesso.";
-				$scope.formCliente.$setPristine();
-				limparForm(cliente);
+				self.addAlert("success", "Registro cadastrado com sucesso.");
+				self.formCliente.$setPristine();
+				self.limparForm(self.cliente);
 
 				// $location.path("/tamplateSite");
 			}).error(function(data, status, headers, config) {
-				switch (status) {
-					case 401: {
-						$scope.message = "You must be authenticated!"
-						break;
-					}
-					case 415: {
-						$scope.message = "Alguma coisa deu errado! Unsupported Media Type"
-						break;
-					}
-					case 500: {
-						$scope.message = "Something went wrong!";
-						break;
-					}
-				}
 				console.log("erro-----------------");
 				console.log(data, status);
 			});
 		} else {
-			$scope.showAlert = true;
-			$scope.classCssValor = "alert alert-warning";
-			$scope.alertMessage = "Informe os campos.";
+			self.addAlert("", "Informe os campos.");
 
-			$scope.formCliente.nome.$setDirty(true);
-			$scope.formCliente.sobreNome.$setDirty(true);
-			$scope.formCliente.dtNacimento.$setDirty(true);
-			$scope.formCliente.email.$setDirty(true);
+			self.formCliente.nome.$setDirty(true);
+			self.formCliente.sobreNome.$setDirty(true);
+			self.formCliente.dtNacimento.$setDirty(true);
+			self.formCliente.email.$setDirty(true);
 		}
 	};
-	var limparForm = function(cliente) {
+	self.limparForm = function(cliente) {
 		for ( var key in cliente) {
-			delete $scope.cliente[key];
+			delete self.cliente[key];
 		}
 	};
 
 	// FUNCIONALIDADES DA LISTA
 	$log.info("Iniciando listaClienteController");
-	$scope.itemsPerPage = 10;
-	$scope.currentPage = 1;
+	self.search;
+	self.itemsPerPage = 10;
+	self.currentPage = 1;
+	self.clientes=[];
 
-	$scope.figureOutTodosToDisplay = function(cliente, index) {
-		var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-		var end = begin + $scope.itemsPerPage;
+	self.figureOutTodosToDisplay = function(cliente, index) {
+		var begin = ((self.currentPage - 1) * self.itemsPerPage);
+		var end = begin + self.itemsPerPage;
 
 		if (index >= begin && index < end) {
 			return true;
@@ -72,39 +68,32 @@ appAutenticacao.controller("clienteController", function($scope, $log, autencica
 
 	};
 
-	$scope.pageChanged = function() {
-		$scope.figureOutTodosToDisplay();
+	self.pageChanged = function() {
+		self.figureOutTodosToDisplay();
 	};
 
-	$scope.selectPerson = function(cliente, index) {
-		$scope.selectedIndex = index;
-		$scope.selectedCliente = cliente;
+	self.selectPerson = function(cliente, index) {
+		self.selectedIndex = index;
+		self.selectedCliente = cliente;
 	};
 
-	$scope.sensitiveSearch = function(cliente) {
-		if ($scope.search) {
-			return cliente.nome.toUpperCase().indexOf($scope.search.toUpperCase()) == 0
-					|| cliente.sobreNome.toUpperCase().indexOf($scope.search.toUpperCase()) == 0
-					|| cliente.email.toUpperCase().indexOf($scope.search.toUpperCase()) == 0;
+	self.sensitiveSearch = function(cliente) {
+		if (self.search) {
+			return cliente.nome.toUpperCase().indexOf(self.search.toUpperCase()) == 0
+					|| cliente.sobreNome.toUpperCase().indexOf(self.search.toUpperCase()) == 0
+					|| cliente.email.toUpperCase().indexOf(self.search.toUpperCase()) == 0;
 		}
 		return true;
 	};
 
-	$scope.findAllCliente = function() {
+	self.findAllCliente = function() {
 		$log.info("parkingHttpFacade.findAllCliente()");
 		autencicacaoHttpFacade.findAllCliente().success(function(data, status, headers, config) {
-			$scope.clientes = data;
+			self.clientes = data;
 		}).error(function(data, status, headers, config) {
-			switch (status) {
-				case 401: {
-					$scope.message = "You must be authenticated!"
-					break;
-				}
-				case 500: {
-					$scope.message = "Something went wrong!";
-					break;
-				}
-			}
+			console.log("erro-----------------");
+			console.log(data, status);
 		});
+		self.openTab('second');
 	}
 });
