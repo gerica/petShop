@@ -1,46 +1,51 @@
-appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log, autencicacaoHttpFacade) {
+appAutenticacao.controller("petCaoController", function($uibModal, $log, autencicacaoHttpFacade) {
 	$log.info("Iniciando petCaoController");
-	$scope.selected = undefined;
-	$scope.alerts = [];
+	var self = this;
+	self.search;
+	self.cachorro
+	
+	self.selected = undefined;
+	self.alerts = [];
+	
 	autencicacaoHttpFacade.findAllRaca().then(function(response) {
-		$scope.racas = response.data;
+		self.racas = response.data;
 	});
 
-	$scope.findAllRaca = function(val) {
+	self.findAllRaca = function(val) {
 		$log.info("parkingHttpFacade.findAllRaca()");
 		return autencicacaoHttpFacade.findAllRaca();
 	}
 
-	$scope.findCliente = function(val) {
+	self.findCliente = function(val) {
 		$log.info("parkingHttpFacade.findCliente()");
 		return autencicacaoHttpFacade.findCliente(val);
 	}
 
-	$scope.addAlert = function(type, msg) {
-		$scope.alerts.push({
+	self.addAlert = function(type, msg) {
+		self.alerts.push({
 			msg : msg,
 			type : type
 		});
 	};
 
-	$scope.closeAlert = function(index) {
-		$scope.alerts.splice(index, 1);
+	self.closeAlert = function(index) {
+		self.alerts.splice(index, 1);
 	};
 
-	$scope.onSelect = function($item, $model, $label) {
-		$scope.$item = $item;
-		$scope.$model = $model;
-		$scope.$label = $label;
+	self.onSelect = function($item, $model, $label) {
+		self.$item = $item;
+		self.$model = $model;
+		self.$label = $label;
 	};
 
-	$scope.salvar = function(cachorro) {
-		$scope.closeAlert(0);
-		if ($scope.formPet.$valid) {
-			autencicacaoHttpFacade.incluirCachorro(cachorro).success(function(data, status, headers, config) {
+	self.salvar = function() {
+		self.closeAlert(0);
+		if (self.formPet.$valid) {
+			autencicacaoHttpFacade.incluirCachorro(self.cachorro).success(function(data, status, headers, config) {
 				$log.info("Cachorro inserido.");
-				$scope.formPet.$setPristine();
-				$scope.addAlert("success", "Registro cadastrado com sucesso.");
-				limparForm(cachorro);
+				self.formPet.$setPristine();
+				self.addAlert("success", "Registro cadastrado com sucesso.");
+				limparForm(self.cachorro);
 
 				// $location.path("/tamplateSite");
 			}).error(function(data, status, headers, config) {
@@ -48,26 +53,27 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 				console.log(data, status);
 			});
 		} else {
-			$scope.addAlert("danger", "Informe os campos.");
+			self.addAlert("danger", "Informe os campos.");
 
-			$scope.formPet.nome.$setDirty(true);
-			$scope.formPet.dtNacimento.$setDirty(true);
+			self.formPet.nome.$setDirty(true);
+			self.formPet.dtNacimento.$setDirty(true);
 		}
 	};
 	var limparForm = function(cachorro) {
 		for ( var key in cachorro) {
-			delete $scope.cachorro[key];
+			delete self.cachorro[key];
 		}
 	};
 
 	// FUNCIONALIDADES DA LISTA
 	$log.info("Iniciando listaCachorroController");
-	$scope.itemsPerPage = 10;
-	$scope.currentPage = 1;
+	self.itemsPerPage = 10;
+	self.currentPage = 1;
+	self.activeTabs = [false, true];
 
-	$scope.figureOutTodosToDisplay = function(cachorro, index) {
-		var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-		var end = begin + $scope.itemsPerPage;
+	self.figureOutTodosToDisplay = function(cachorro, index) {
+		var begin = ((self.currentPage - 1) * self.itemsPerPage);
+		var end = begin + self.itemsPerPage;
 
 		if (index >= begin && index < end) {
 			return true;
@@ -75,42 +81,41 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 		return false;
 	};
 
-	$scope.pageChanged = function() {
-		$scope.figureOutTodosToDisplay();
+	self.pageChanged = function() {
+		self.figureOutTodosToDisplay();
 	};
 
-	$scope.setCachorro = function(cachorro, index) {
-		$scope.selectedIndex = index;
-		//$scope.selectedCachorro = cachorro;
-		$scope.open('lg', cachorro);
+	self.setCachorro = function(cachorro, index) {
+		self.selectedIndex = index;
+		self.open('lg', cachorro);
 	};
 
-	$scope.sensitiveSearch = function(cachorro) {
-		if ($scope.search) {
-			return cachorro.nome.toUpperCase().indexOf($scope.search.toUpperCase()) == 0;
+	self.sensitiveSearch = function(cachorro) {
+		if (self.search) {
+			return cachorro.nome.toUpperCase().indexOf(self.search.toUpperCase()) == 0;
 		}
 		return true;
 	};
 
-	$scope.findAllCachorro = function() {
+	self.findAllCachorro = function() {
 		$log.info("parkingHttpFacade.findAllCachorro()");
 		autencicacaoHttpFacade.findAllCachorro().success(function(data, status, headers, config) {
-			$scope.cachorros = data;
+			self.cachorros = data;
 		}).error(function(data, status, headers, config) {
 			$log.error("erro ao buscar os cachorros");
 		});
 	}
 
 
-	$scope.findAllCachorro();
+	self.findAllCachorro();
 
 	// funcionalidade de modal
-	$scope.open = function (size, cachorro) {
+	self.open = function (size, cachorro) {
 
 		var modalInstance = $uibModal.open({
-			animation: $scope.animationsEnabled,
+			animation: self.animationsEnabled,
 			templateUrl: '/petShop/pages/pet/cao/modalDetalhe.html',
-			controller: 'modalDetalheCachorroController',
+			controller: 'modalDetalheCachorroController as ctrl',
 			size: size,
 			resolve: {
 				cachorro: function () {
@@ -120,8 +125,8 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 		});
 
 		modalInstance.result.then(function (cachorro) {
-			$scope.selectedCachorro = cachorro;		
-			$('#idTabPet a[href="#cadastro"]').tab('show');
+			self.cachorro = cachorro;
+			self.activeTabs = [true, false];
 			
 		}, function () {
 			$log.info('Modal dismissed at: ' + new Date());
@@ -129,15 +134,15 @@ appAutenticacao.controller("petCaoController", function($scope, $uibModal, $log,
 	};
 });
 
-appAutenticacao.controller('modalDetalheCachorroController', function ($scope, $uibModalInstance, $log, cachorro) {
+appAutenticacao.controller('modalDetalheCachorroController', function ($uibModalInstance, $log, cachorro) {
+	var self = this;
+	self.cachorro = cachorro;
 
-	$scope.cachorro = cachorro;
-
-	$scope.alterar = function () {
-		$uibModalInstance.close($scope.cachorro);
+	self.alterar = function () {
+		$uibModalInstance.close(self.cachorro);
 	};
 
-	$scope.cancel = function () {
+	self.cancel = function () {
 		$uibModalInstance.dismiss('cancel');
 	};
 });

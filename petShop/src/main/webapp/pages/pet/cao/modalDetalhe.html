@@ -12,26 +12,26 @@
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Proprietário:</label>
-                                <span>{{cachorro.cliente.nome}}</span>
+                                <span>{{ctrl.cachorro.cliente.nome}}</span>
 
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Raça:</label>
-                                <span>{{cachorro.raca.nome}}</span>
+                                <span>{{ctrl.cachorro.raca.nome}}</span>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Nome:</label>
-								<span>{{cachorro.nome}}</span>
+								<span>{{ctrl.cachorro.nome}}</span>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Data Nacimento:</label>
-                                <span>{{cachorro.dtNacimento | date:"longDate"}}</span>
+                                <span>{{ctrl.cachorro.dtNacimento | date:"longDate"}}</span>
 							</div>
 						</div>
 						<!-- /.row (nested) -->
@@ -47,6 +47,6 @@
 
 </div>
 <div class="modal-footer">
-	<button class="btn btn-primary" type="button" ng-click="alterar()">Alterar</button>
-	<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-primary" type="button" ng-click="ctrl.alterar()">Alterar</button>
+	<button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Cancel</button>
 </div>
