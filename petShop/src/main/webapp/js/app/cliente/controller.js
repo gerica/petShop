@@ -56,6 +56,7 @@ appAutenticacao.controller("clienteController", function($uibModal, $log, autenc
 	self.itemsPerPage = 10;
 	self.currentPage = 1;
 	self.clientes=[];
+	self.activeTabs = [true, false];
 
 	self.figureOutTodosToDisplay = function(cliente, index) {
 		var begin = ((self.currentPage - 1) * self.itemsPerPage);
@@ -73,8 +74,8 @@ appAutenticacao.controller("clienteController", function($uibModal, $log, autenc
 	};
 
 	self.selectPerson = function(cliente, index) {
-		self.selectedIndex = index;
-		self.selectedCliente = cliente;
+		self.selectedIndex = index;		
+		self.open('lg', cliente);
 	};
 
 	self.sensitiveSearch = function(cliente) {
@@ -96,4 +97,44 @@ appAutenticacao.controller("clienteController", function($uibModal, $log, autenc
 		});
 		self.openTab('second');
 	}
+	
+	// funcionalidade de modal
+	self.open = function (size, cliente) {
+
+		var modalInstance = $uibModal.open({
+			animation: self.animationsEnabled,
+			templateUrl: '/petShop/pages/cliente/modalDetalhe.html',
+			controller: 'modalDetalheClienteController as ctrl',
+			size: size,
+			resolve: {
+				cliente: function () {
+					return cliente;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (cachorro) {
+			self.cliente = cachorro;
+			self.cliente.dtNacimento = new Date(self.cliente.dtNacimento);
+			self.activeTabs = [true, false];
+			
+		}, function () {
+			$log.info('Modal dismissed at: ' + new Date());
+		});
+	};
+
+});
+
+
+appAutenticacao.controller('modalDetalheClienteController', function ($uibModalInstance, $log, cliente) {
+	var self = this;
+	self.cliente = cliente;
+
+	self.alterar = function () {
+		$uibModalInstance.close(self.cliente);
+	};
+
+	self.cancel = function () {
+		$uibModalInstance.dismiss('cancel');
+	};
 });

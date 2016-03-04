@@ -61,19 +61,6 @@ appAutenticacao.directive('navigation', function() {
 	}
 });
 
-// appAutenticacao.directive('autoComplete', function($timeout) {
-// return function(scope, iElement, iAttrs) {
-// iElement.autocomplete({
-// source : scope[iAttrs.uiItems],
-// select : function() {
-// $timeout(function() {
-// iElement.trigger('input');
-// }, 0);
-// }
-// });
-// };
-// });
-
 appAutenticacao.directive('autoComplete', function(autoCompleteDataService) {
 	return {
 		restrict : 'A',
@@ -83,8 +70,27 @@ appAutenticacao.directive('autoComplete', function(autoCompleteDataService) {
 			debugger
 			elem.autocomplete({
 				source : autoCompleteDataService.getSource(), // from your
-																// service
+				// service
 				minLength : 2
+			});
+		}
+	};
+});
+
+// Common directive for Focus
+
+appAutenticacao.directive('focus', function($timeout) {
+	return {
+		scope : {
+			trigger : '@focus'
+		},
+		link : function(scope, element) {
+			scope.$watch('trigger', function(value) {
+				if (value === "true") {
+					$timeout(function() {
+						element[0].focus();
+					});
+				}
 			});
 		}
 	};

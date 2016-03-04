@@ -1,19 +1,19 @@
-appAutenticacao.controller("petCaoController", function($uibModal, $log, autencicacaoHttpFacade) {
-	$log.info("Iniciando petCaoController");
+appAutenticacao.controller("petGatoController", function($uibModal, $log, autencicacaoHttpFacade) {
+	$log.info("Iniciando petGatoController");
 	var self = this;
 	self.search;
-	self.cachorro
+	self.gato
 	
 	self.selected = undefined;
 	self.alerts = [];
 	
-	autencicacaoHttpFacade.findAllRaca().then(function(response) {
+	autencicacaoHttpFacade.findAllRacaGato().then(function(response) {
 		self.racas = response.data;
 	});
 
-	self.findAllRaca = function(val) {
-		$log.info("parkingHttpFacade.findAllRaca()");
-		return autencicacaoHttpFacade.findAllRaca();
+	self.findAllRacaGato = function() {
+		$log.info("petGatoController.findAllRacaGato()");
+		return autencicacaoHttpFacade.findAllRacaGato();
 	}
 
 	self.findCliente = function(val) {
@@ -41,13 +41,11 @@ appAutenticacao.controller("petCaoController", function($uibModal, $log, autenci
 	self.salvar = function() {
 		self.closeAlert(0);
 		if (self.formPet.$valid) {
-			autencicacaoHttpFacade.incluirCachorro(self.cachorro).success(function(data, status, headers, config) {
-				$log.info("Cachorro inserido.");
-				self.formPet.$setPristine();
+			autencicacaoHttpFacade.incluirGato(self.gato).success(function(data, status, headers, config) {
+				$log.info("gato inserido.");
+				self.formPet.$setPristine(true);
 				self.addAlert("success", "Registro cadastrado com sucesso.");
-				self.limparForm(self.cachorro);
-
-				// $location.path("/tamplateSite");
+				self.limparForm(self.gato);
 			}).error(function(data, status, headers, config) {
 				console.log("erro-----------------");
 				console.log(data, status);
@@ -60,21 +58,20 @@ appAutenticacao.controller("petCaoController", function($uibModal, $log, autenci
 		}
 	};
 	
-	self.limparForm = function(cachorro) {
-		for ( var key in cachorro) {
-			//delete self.cachorro[key];
-			self.cachorro = null;
+	self.limparForm = function(gato) {
+		for ( var key in gato) {
+			self.gato = null;
 		}
 		self.formPet.$setPristine(true);
 	};
 
 	// FUNCIONALIDADES DA LISTA
-	$log.info("Iniciando listaCachorroController");
+	$log.info("Iniciando listaGatoController");
 	self.itemsPerPage = 10;
 	self.currentPage = 1;
 	self.activeTabs = [false, true];
 
-	self.figureOutTodosToDisplay = function(cachorro, index) {
+	self.figureOutTodosToDisplay = function(gato, index) {
 		var begin = ((self.currentPage - 1) * self.itemsPerPage);
 		var end = begin + self.itemsPerPage;
 
@@ -88,49 +85,49 @@ appAutenticacao.controller("petCaoController", function($uibModal, $log, autenci
 		self.figureOutTodosToDisplay();
 	};
 
-	self.setCachorro = function(cachorro, index) {
+	self.setGato = function(gato, index) {
 		self.selectedIndex = index;
-		self.open('lg', cachorro);
+		self.open('lg', gato);
 	};
 
-	self.sensitiveSearch = function(cachorro) {
+	self.sensitiveSearch = function(gato) {
 		if (self.search) {
-			return cachorro.nome.toUpperCase().indexOf(self.search.toUpperCase()) == 0 || 
-			cachorro.cliente.nome.toUpperCase().indexOf(self.search.toUpperCase()) ==0 ;
+			return gato.nome.toUpperCase().indexOf(self.search.toUpperCase()) == 0 ||
+			gato.cliente.nome.toUpperCase().indexOf(self.search.toUpperCase()) ==0 ;;
 		}
 		return true;
 	};
 
-	self.findAllCachorro = function() {
-		$log.info("parkingHttpFacade.findAllCachorro()");
-		autencicacaoHttpFacade.findAllCachorro().success(function(data, status, headers, config) {
-			self.cachorros = data;
+	self.findAllGato = function() {
+		$log.info("parkingHttpFacade.findAllGato()");
+		autencicacaoHttpFacade.findAllGato().success(function(data, status, headers, config) {
+			self.gatos = data;
 		}).error(function(data, status, headers, config) {
-			$log.error("erro ao buscar os cachorros");
+			$log.error("erro ao buscar os gatos");
 		});
 	}
 
 
-	self.findAllCachorro();
+	self.findAllGato();
 
 	// funcionalidade de modal
-	self.open = function (size, cachorro) {
+	self.open = function (size, gato) {
 
 		var modalInstance = $uibModal.open({
 			animation: self.animationsEnabled,
-			templateUrl: '/petShop/pages/pet/cao/modalDetalhe.html',
-			controller: 'modalDetalheCachorroController as ctrl',
+			templateUrl: '/petShop/pages/pet/gato/modalDetalhe.html',
+			controller: 'modalDetalheGatoController as ctrl',
 			size: size,
 			resolve: {
-				cachorro: function () {
-					return cachorro;
+				gato: function () {
+					return gato;
 				}
 			}
 		});
 
-		modalInstance.result.then(function (cachorro) {
-			self.cachorro = cachorro;
-			self.cachorro.dtNacimento = new Date(self.cachorro.dtNacimento);
+		modalInstance.result.then(function (gato) {
+			self.gato = gato;
+			self.gato.dtNacimento = new Date(self.gato.dtNacimento);
 			self.activeTabs = [true, false];
 			
 		}, function () {
@@ -139,12 +136,12 @@ appAutenticacao.controller("petCaoController", function($uibModal, $log, autenci
 	};
 });
 
-appAutenticacao.controller('modalDetalheCachorroController', function ($uibModalInstance, $log, cachorro) {
+appAutenticacao.controller('modalDetalheGatoController', function ($uibModalInstance, $log, gato) {
 	var self = this;
-	self.cachorro = cachorro;
+	self.gato = gato;
 
 	self.alterar = function () {
-		$uibModalInstance.close(self.cachorro);
+		$uibModalInstance.close(self.gato);
 	};
 
 	self.cancel = function () {

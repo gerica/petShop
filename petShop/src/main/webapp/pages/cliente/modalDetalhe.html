@@ -1,37 +1,36 @@
 <div class="modal-header">
-	<h3 class="modal-title">Detalhe de Cachorro</h3>
+	<h3 class="modal-title">Detalhe do Cliente</h3>
 </div>
 <div class="modal-body">
-	<form role="form" name="formPet" novalidate>
+	<form role="form" name="formCliente" novalidate>
 		<!-- /.row -->
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Dados do cachorro</div>
+					<div class="panel-heading">Dados do cliente</div>
 					<div class="panel-body">
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label>Proprietário:</label>
-                                <span>{{ctrl.cachorro.cliente.nome}}</span>
-
+								<label>Nome</label>
+                                <span>{{ctrl.cliente.nome}}</span>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label>Raça:</label>
-                                <span>{{ctrl.cachorro.raca.nome}}</span>
+								<label>Sobrenome</label>
+                                <span>{{ctrl.cliente.sobreNome}}</span>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label>Nome:</label>
-								<span>{{ctrl.cachorro.nome}}</span>
+								<label>Email:</label>
+								<span>{{ctrl.cliente.email}}</span>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label>Data Nacimento:</label>
-                                <span>{{ctrl.cachorro.dtNacimento | date:'dd/M/yyyy'}}</span>
+                                <span>{{ctrl.cliente.dtNacimento |date:'dd/M/yyyy'}}</span>
 							</div>
 						</div>
 						<!-- /.row (nested) -->

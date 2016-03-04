@@ -32,15 +32,31 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 			return response;
 		});
 	};
+	
+	var _findAllRacaGato = function(val) {
+		return $http.get("/petShop/rest/petShopRest/findAllRacaGato").then(function(response) {
+			return response;
+		});
+	};
 
 	var _incluirCachorro = function(cliente) {
 		return $http.post("/petShop/rest/cachorroRest/incluir", cliente);
 	};
-
+	
 	var _findAllCachorro = function() {
 		return $http.get("/petShop/rest/cachorroRest/findAllCachorro", {
 			cache : false
 		});
+	};
+
+	var _findAllGato = function() {
+		return $http.get("/petShop/rest/gatoRest/findAllGato", {
+			cache : false
+		});
+	};
+	
+	var _incluirGato = function(gato) {
+		return $http.post("/petShop/rest/gatoRest/incluir", gato);
 	};
 
 	return {
@@ -51,5 +67,8 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		findAllRaca : _findAllRaca,
 		incluirCachorro : _incluirCachorro,
 		findAllCachorro : _findAllCachorro,
+		findAllGato : _findAllGato,
+		incluirGato: _incluirGato,
+		findAllRacaGato : _findAllRacaGato,
 	};
 });

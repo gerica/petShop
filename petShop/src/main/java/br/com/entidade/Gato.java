@@ -14,8 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cachorro")
-public class Cachorro {
+@Table(name = "gato")
+public class Gato {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -29,7 +29,7 @@ public class Cachorro {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_raca")
-	private RacaCachorro raca;
+	private RacaGato raca;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_cliente", nullable = false)
@@ -59,11 +59,11 @@ public class Cachorro {
 		this.dtNacimento = dtNacimento;
 	}
 
-	public RacaCachorro getRaca() {
+	public RacaGato getRaca() {
 		return raca;
 	}
 
-	public void setRaca(RacaCachorro raca) {
+	public void setRaca(RacaGato raca) {
 		this.raca = raca;
 	}
 

@@ -1,7 +1,7 @@
-<div id="page-wrapper" ng-controller="petCaoController as ctrl">
+<div id="page-wrapper" ng-controller="petGatoController as ctrl">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Cachorro</h1>
+			<h1 class="page-header">Gato</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -14,12 +14,12 @@
 				<!-- /.row -->
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Dados do cachorro</div>
+						<div class="panel-heading">Dados do gato</div>
 						<div class="panel-body">
 							<div class="col-lg-4">
 								<div class="form-group">
 									<label ng-class="{'control-label': ctrl.formPet.raca.$dirty && ctrl.formPet.raca.$invalid}">Proprietário:</label>
-									<input type="text" ng-model="ctrl.cachorro.cliente" placeholder="Nome do proprietário"
+									<input type="text" ng-model="ctrl.gato.cliente" placeholder="Nome do proprietário"
 										uib-typeahead="cliente as cliente.nome for cliente in ctrl.findCliente($viewValue)" typeahead-loading="loadingClientes"
 										typeahead-no-results="semResultado" class="form-control" typeahead-min-length=3> <i ng-show="loadingClientes"
 										class="glyphicon glyphicon-refresh"></i>
@@ -31,7 +31,7 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formPet.raca.$dirty && ctrl.formPet.raca.$invalid}">
 									<label ng-class="{'control-label': ctrl.formPet.raca.$dirty && ctrl.formPet.raca.$invalid}">Raça:</label>
-									<input type="text" ng-model="ctrl.cachorro.raca" placeholder="Raça"
+									<input type="text" ng-model="ctrl.gato.raca" placeholder="Raça"
 										uib-typeahead="raca as raca.nome for raca in ctrl.racas | filter:{nome:$viewValue} | limitTo:8" class="form-control">
 
 								</div>
@@ -39,11 +39,11 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formPet.nome.$dirty && ctrl.formPet.nome.$invalid}">
 									<label ng-class="{'control-label': ctrl.formPet.nome.$dirty && ctrl.formPet.nome.$invalid}">nome:</label>
-									<input class="form-control" type="text" placeholder="nome" name="nome" ng-model="ctrl.cachorro.nome" ng-minlength=3 ng-maxlength=100 required />
+									<input class="form-control" type="text" placeholder="nome" name="nome" ng-model="ctrl.gato.nome" ng-minlength=3 ng-maxlength=100 required />
 									<div class="alert alert-danger" ng-show="ctrl.formPet.nome.$dirty && ctrl.formPet.nome.$invalid">
 										<small ng-show="ctrl.formPet.nome.$error.required"> Informe o nome. </small>
-										<small ng-show="ctrl.formPet.nome.$error.minlength"> O nome dever� ter mais que três letras. </small>
-										<small ng-show="ctrl.formPet.nome.$error.maxlength"> O nome n�o poder� ter mais que cem letras. </small>
+										<small ng-show="ctrl.formPet.nome.$error.minlength"> O nome deverá ter mais que três letras. </small>
+										<small ng-show="ctrl.formPet.nome.$error.maxlength"> O nome não poderá ter mais que cem letras. </small>
 									</div>
 
 								</div>
@@ -51,9 +51,9 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formPet.dtNacimento.$dirty && ctrl.formPet.dtNacimento.$invalid}">
 									<label ng-class="{'control-label': ctrl.formPet.dtNacimento.$dirty && ctrl.formPet.dtNacimento.$invalid}">Data Nacimento:</label>
-									<input class="form-control" type="date" name="dtNacimento" ng-model="ctrl.cachorro.dtNacimento" required />
+									<input class="form-control" type="date" name="dtNacimento" ng-model="ctrl.gato.dtNacimento" required />
 									<div class="alert alert-danger" ng-show="ctrl.formPet.dtNacimento.$dirty && ctrl.formPet.dtNacimento.$invalid">
-										<small ng-show="ctrl.formPet.dtNacimento.$error"> A data de nacimento � invalida. </small>
+										<small ng-show="ctrl.formPet.dtNacimento.$error"> A data de nacimento é invalida. </small>
 									</div>
 								</div>
 							</div>
@@ -66,17 +66,17 @@
 				<!-- /.col-lg-12 -->
 				<div class="row">
 					<button type="submit" class="btn btn-default">Salvar</button>
-					<button type="button" class="btn btn-default" ng-click="ctrl.limparForm(ctrl.cachorro)" ng-show="ctrl.cachorro">Limpar</button>
+					<button type="button" class="btn btn-default" ng-click="ctrl.limparForm(ctrl.gato)" ng-show="ctrl.gato">Limpar</button>
 				</div>
 			</form>
 		</div>
-		</uib-tab> <uib-tab index="1" active="ctrl.activeTabs[1]" heading="Lista" ng-click="ctrl.findAllCachorro()">
+		</uib-tab> <uib-tab index="1" active="ctrl.activeTabs[1]" heading="Lista" ng-click="ctrl.findAllGato()">
 		<div class="row">
 			<div class="col-md-12">
 				<form class="form-inline well well-sm">
 					<span class="fa fa-search"></span>
 					<div class="form-group">
-						<input type="text" class="form-control" id="search" ng-model="ctrl.search" placeholder="Pesquisar..."  autofocus  focus="true"/>
+						<input type="text" class="form-control" id="search" ng-model="ctrl.search" placeholder="Pesquisar..." autofocus  focus="true"/>
 					</div>
 				</form>
 			</div>
@@ -84,7 +84,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Lista de Cachorros</div>
+					<div class="panel-heading">Lista de Gatoss</div>
 					<!-- /.panel-heading -->
 					<div class="panel-body">
 						<div class="dataTable_wrapper">
@@ -104,25 +104,25 @@
 								</thead>
 								<tbody>
 									<tr
-										ng-repeat="cachorro in cachorrosFiltrados = (ctrl.cachorros | filter:ctrl.sensitiveSearch | filter:ctrl.figureOutTodosToDisplay |  orderBy:order)"
-										ng-click="ctrl.setCachorro(cachorro, $index)">
-										<td>{{ cachorro.id }}</td>
-										<td>{{ cachorro.nome }}</td>
-										<td>{{ cachorro.dtNacimento | date:"longDate" }}</td>
-										<td>{{ cachorro.cliente.nome}}</td>
-										<td>{{ cachorro.raca.nome}}</td>
+										ng-repeat="gato in gatosFiltrados = (ctrl.gatos | filter:ctrl.sensitiveSearch | filter:ctrl.figureOutTodosToDisplay |  orderBy:order)"
+										ng-click="ctrl.setGato(gato, $index)">
+										<td>{{ gato.id }}</td>
+										<td>{{ gato.nome }}</td>
+										<td>{{ gato.dtNacimento | date:"longDate" }}</td>
+										<td>{{ gato.cliente.nome}}</td>
+										<td>{{ gato.raca.nome}}</td>
 									</tr>
-									<tr ng-show="cachorrosFiltrados == 0">
+									<tr ng-show="gatosFiltrados == 0">
 										<td colspan="5">
 											<div class="alert alert-info">
-												<p class="text-center">Nenhum cachorro para o filtro aplicado '{{ search }}'</p>
+												<p class="text-center">Nenhum gato para o filtro aplicado '{{ search }}'</p>
 											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 							<div class="col-md-6 col-md-offset-4" ng-show="clientesFiltrados != 0">
-								<uib-pagination boundary-links="true" total-items="ctrl.cachorros.length" ng-model="ctrl.currentPage" items-per-page="ctrl.itemsPerPage"
+								<uib-pagination boundary-links="true" total-items="ctrl.gatos.length" ng-model="ctrl.currentPage" items-per-page="ctrl.itemsPerPage"
 									class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 							</div>
 						</div>
