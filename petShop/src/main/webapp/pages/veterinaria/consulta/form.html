@@ -1,0 +1,64 @@
+<div id="page-wrapper" ng-controller="vetConsultaController as ctrl">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Consulta</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+
+	<div class="tab-content">
+		<uib-tabset> <uib-tab index="0" heading="Cadastro" active="ctrl.activeTabs[0]">
+		<form role="form" name="ctrl.formCliente" novalidate ng-submit="ctrl.salvar()">
+			<uib-alert ng-repeat="alert in ctrl.alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Dados do Proprietário</div>
+						<div class="panel-body">
+							<div class="col-lg-4">
+								<label ng-class="{'control-label': ctrl.formPet.raca.$dirty && ctrl.formPet.raca.$invalid}">Pet(nome):</label>
+								<input type="text" ng-model="ctrl.cachorro.cliente" placeholder="Nome do proprietário"
+									uib-typeahead="cliente as cliente.nome for cliente in ctrl.findCliente($viewValue)" typeahead-loading="loadingClientes"
+									typeahead-no-results="semResultado" class="form-control" typeahead-min-length=3> <i ng-show="loadingClientes"
+									class="glyphicon glyphicon-refresh"></i>
+								<div ng-show="semResultado">
+									<i class="glyphicon glyphicon-remove"></i> Sem resultado. 
+									<br>
+									<button type="button" class="btn btn-default" ng-click="ctrl.open('lg')">Cadastrar</button>
+								</div>
+							</div>
+
+
+						</div>
+						<!-- /.row (nested) -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+			<div class="row">
+				<button type="submit" class="btn btn-default">Salvar</button>
+			</div>
+		</form>
+		</uib-tab> <uib-tab index="1" heading="Lista" ng-click="ctrl.findAllCliente()" active="ctrl.activeTabs[1]">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="form-inline well well-sm"></form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default"></div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</uib-tab>
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.row -->
+</uib-tabset>
+</div>
+<!-- /#page-wrapper -->
