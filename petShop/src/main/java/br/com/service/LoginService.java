@@ -1,9 +1,9 @@
 package br.com.service;
 
-import br.com.entidade.UsuarioLogin;
+import br.com.entidade.permissao.Usuario;
 
 public interface LoginService {
 
-	void logar(UsuarioLogin login);
+	void logar(Usuario usuario);
 
 }

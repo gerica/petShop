@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.entidade.Cliente;
+import br.com.entidade.sistema.Cliente;
 import br.com.repository.ClienteRepository;
 import br.com.service.ClienteService;
 
@@ -44,7 +44,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public List<Cliente> findByValor(String valor) {
 		logger.info("ClienteServiceImpl.findByValor()");
-		return clienteRepository.findByNomeContainingIgnoreCase(valor);
+		return clienteRepository.findByDsNomeContainingIgnoreCase(valor);
 	}
 
 }

@@ -1,64 +1,82 @@
-appAutenticacao.controller("loginController", function($scope, $log, $location, autencicacaoHttpFacade) {
-	$log.info("Iniciando loginController");
-	$scope.showAlert = false;
-	$scope.classCssValor;
-	$scope.alertMessage;
-	//
-	$scope.closeAlert = function() {
-		$scope.showAlert = false;
-	};
+appAutenticacao.controller("indexController", [
+		'$log', function($log) {
+			$log.info("Iniciando indexController");
+			var self = this;
 
-	// Binding the park function to the scope
-	$scope.logar = function(userLogin) {
-		if (validarForm(userLogin)) {
+			self.selectedTemplate = {
+				"path" : "pages/login.html"
+			};
+		}
+]);
 
-			autencicacaoHttpFacade.login(userLogin).success(function(data, status, headers, config) {
-				$log.info("Login com sucesso.");
-				$location.path("/tamplateSite");
-			}).error(function(data, status, headers, config) {
-				switch (status) {
-					case 401: {
-						$scope.message = "You must be authenticated!"
-						break;
-					}
-					case 415: {
-						$scope.message = "Alguma coisa deu errado! Unsupported Media Type"
-						break;
-					}
-					case 500: {
-						$scope.message = "Something went wrong!";
-						break;
-					}
+appAutenticacao.controller("loginController", [
+		'$scope', '$log', 'autencicacaoHttpFacade', function($scope, $log, autencicacaoHttpFacade) {
+			$log.info("Iniciando loginController");
+			var self = this;
+			self.usuario;
+
+			// funcionalidade de alerta
+			self.alerts = [];
+			self.addAlert = function(type, msg) {
+				self.alerts.push({
+					msg : msg,
+					type : type
+				});
+			};
+			self.closeAlert = function(index) {
+				self.alerts.splice(index, 1);
+			};
+			// fim - funcionalidade de alerta
+
+			// Binding the park function to the scope
+			self.logar = function() {
+				self.closeAlert(0);
+
+				if (self.formLogin.$valid) {
+					autencicacaoHttpFacade.login(self.usuario).success(function(data, status, headers, config) {
+						$log.info("Login com sucesso.");
+
+						$scope.indexCtrl.selectedTemplate = {
+							"path" : "pages/tamplateSite.html"
+						}
+
+					}).error(function(data, status, headers, config) {
+						console.log("erro-----------------");
+						console.log(data, status);
+					});
+				} else {
+					self.addAlert("", "Informe o email é a senha.");
+
+					self.formLogin.email.$setDirty(true);
+					self.formLogin.senha.$setDirty(true);
+
 				}
-				console.log("erro-----------------");
-				console.log(data, status);
-			});
+			};
+
+			function validarForm(userLogin) {
+				$log.info(userLogin);
+				if (typeof userLogin === 'undefined') {
+					$scope.showAlert = true;
+					$scope.classCssValor = "alert alert-danger";
+					$scope.alertMessage = "Informe o email e a senha."
+					return false;
+				} else if (typeof userLogin.email === 'undefined') {
+					$scope.showAlert = true;
+					$scope.classCssValor = "alert alert-danger";
+					$scope.alertMessage = "Informe o email."
+					return false;
+				} else if (typeof userLogin.senha === 'undefined') {
+					$scope.showAlert = true;
+					$scope.classCssValor = "alert alert-danger";
+					$scope.alertMessage = "Informe a senha."
+					return false;
+				}
+				return true;
+
+			}
+
 		}
-	};
-
-	function validarForm(userLogin) {
-		$log.info(userLogin);
-		if (typeof userLogin === 'undefined') {
-			$scope.showAlert = true;
-			$scope.classCssValor = "alert alert-danger";
-			$scope.alertMessage = "Informe o email e a senha."
-			return false;
-		} else if (typeof userLogin.email === 'undefined') {
-			$scope.showAlert = true;
-			$scope.classCssValor = "alert alert-danger";
-			$scope.alertMessage = "Informe o email."
-			return false;
-		} else if (typeof userLogin.senha === 'undefined') {
-			$scope.showAlert = true;
-			$scope.classCssValor = "alert alert-danger";
-			$scope.alertMessage = "Informe a senha."
-			return false;
-		}
-		return true;
-
-	}
-
-});
+]);
 
 appAutenticacao.controller("dashboardController", function($scope, $log) {
 	$log.info("Iniciando dashboardController");
@@ -66,17 +84,21 @@ appAutenticacao.controller("dashboardController", function($scope, $log) {
 		$log.info('petCaoForm');
 	}
 });
-appAutenticacao.controller("petCaoController", function($scope, $log) {
-	$log.info("Iniciando petCaoController");
-});
 
-appAutenticacao.controller("painelController", function($scope, $log) {
-	$log.info("Iniciando painelController");
-});
+appAutenticacao.controller("tamplateSiteController", [
+		'$scope', '$log', function($scope, $log) {
+			$log.info("Iniciando tamplateSiteController");
+			var self = this;
 
-appAutenticacao.controller("tamplateSiteController", function($scope, $log) {
-	$log.info("Iniciando tamplateSiteController");
-	$scope.selectedTemplate = {
-		"path" : "pages/dashboard.html"
-	};
-});
+			self.selectedTemplate = {
+				"path" : "pages/dashboard.html"
+			};
+
+			self.logout = function() {
+				$log.info("logout");
+				$scope.indexCtrl.selectedTemplate = {
+					"path" : "pages/login.html"
+				}
+			}
+		}
+]);

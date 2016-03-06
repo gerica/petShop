@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.entidade.Cliente;
+import br.com.entidade.sistema.Cliente;
 import br.com.service.ClienteService;
 
 @Component

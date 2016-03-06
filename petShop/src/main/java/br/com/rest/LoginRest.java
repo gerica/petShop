@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.entidade.UsuarioLogin;
+import br.com.entidade.permissao.Usuario;
 import br.com.service.LoginService;
 
 @Component
@@ -22,8 +22,8 @@ public class LoginRest {
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response login(UsuarioLogin usuarioLogin) {
-		loginService.logar(usuarioLogin);
+	public Response login(Usuario usuario) {
+		loginService.logar(usuario);
 		return Response.status(200).build();
 	}
 

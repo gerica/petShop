@@ -74,8 +74,9 @@
 
 <title>Pet Shop</title>
 </head>
-<body>
-	<div ng-include src="'pages/tamplateSite.html'"></div>
+<body ng-controller="indexController as indexCtrl">
+<!-- 	<div ng-include src="'pages/tamplateSite.html'"></div> -->
+	<div ng-include="indexCtrl.selectedTemplate.path"></div>
 </body>
 
 </html>
