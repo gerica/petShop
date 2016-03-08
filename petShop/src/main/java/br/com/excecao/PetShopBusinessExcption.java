@@ -2,7 +2,6 @@ package br.com.excecao;
 
 import java.io.Serializable;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -33,7 +32,7 @@ public class PetShopBusinessExcption extends Exception implements Serializable, 
 
 	@Override
 	public Response toResponse(PetShopBusinessExcption exception) {
-		return Response.status(Response.Status.BAD_REQUEST).entity(exception.getMessage()).type(MediaType.APPLICATION_JSON).build();
+		return Response.status(Response.Status.BAD_REQUEST).entity(exception.getMessage()).build();
 	}
 
 }

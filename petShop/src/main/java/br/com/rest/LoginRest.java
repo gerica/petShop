@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.entidade.permissao.Usuario;
 import br.com.excecao.PetShopBusinessExcption;
+import br.com.excecao.PetShopExceptionWebApplication;
 import br.com.service.LoginService;
 
 @Component
@@ -29,14 +30,13 @@ public class LoginRest {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response login(Usuario usuario) throws PetShopBusinessExcption {
+	public Response login(Usuario usuario) {
 		Usuario usuarioLogin = null;
 		try {
 			usuarioLogin = loginService.logar(usuario);
 		} catch (PetShopBusinessExcption e) {
 			logger.error(e.getMessage());
-//			return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-			throw e;
+			throw new PetShopExceptionWebApplication(e.getMessage());
 
 		}
 		return Response.ok().entity(usuarioLogin).build();

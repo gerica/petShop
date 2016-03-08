@@ -42,14 +42,14 @@ appAutenticacao.controller("loginController", [
 
 					}).error(function(data, status, headers, config) {
 						switch (status) {
-							case 412: {
-								self.addAlert("", "Login ou a senha não confere.");
+							case 406: {
+								self.addAlert("", data.description);
 								break;
 							}
 						}
-						$log.error(status, data, "Login ou a senha não confere");
-						$log.error(headers);
-						$log.error(config);
+//						$log.error(status, data, "Login ou a senha não confere");
+//						$log.error(headers);
+//						$log.error(config);
 					});
 				} else {
 					self.addAlert("", "Informe o email é a senha.");

@@ -23,9 +23,6 @@
 		<!-- Jersey -->
 		<jersey.version>1.19</jersey.version>
 
-		<!-- Jackson -->
-		<jackson.version>2.1.4</jackson.version>
-
 		<!-- Spring -->
 		<spring-framework.version>4.1.6.RELEASE</spring-framework.version>
 		<spring-framework-data.version>1.8.0.RELEASE</spring-framework-data.version>
@@ -82,30 +79,6 @@
 			<artifactId>jersey-json</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.fasterxml.jackson.jaxrs</groupId> -->
-		<!-- <artifactId>jackson-jaxrs-json-provider</artifactId> -->
-		<!-- <version>{jackson.version}</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
-		<!-- <artifactId>jackson-core</artifactId> -->
-		<!-- <version>{jackson.version}</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
-		<!-- <artifactId>jackson-annotations</artifactId> -->
-		<!-- <version>{jackson.version}</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>org.codehaus.jackson</groupId> -->
-		<!-- <artifactId>jackson-core-asl</artifactId> -->
-		<!-- <version>1.9.13</version> -->
-		<!-- </dependency> -->
 
 		<!-- Spring 3 dependencies -->
 		<dependency>
