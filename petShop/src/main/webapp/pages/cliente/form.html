@@ -19,7 +19,7 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formCliente.nome.$dirty && ctrl.formCliente.nome.$invalid}">
 									<label ng-class="{'control-label': ctrl.formCliente.nome.$dirty && ctrl.formCliente.nome.$invalid}">Nome:</label>
-									<input class="form-control" type="text" placeholder="Nome" name="nome" ng-model="ctrl.cliente.nome" ng-minlength=3 ng-maxlength=100 required />
+									<input class="form-control" type="text" placeholder="Nome" name="nome" ng-model="ctrl.cliente.dsNome" ng-minlength=3 ng-maxlength=100 required />
 									<div class="alert alert-danger" ng-show="ctrl.formCliente.nome.$dirty && ctrl.formCliente.nome.$invalid ">
 										<small ng-show="ctrl.formCliente.nome.$error.required"> Informe o nome. </small>
 										<small ng-show="ctrl.formCliente.nome.$error.minlength"> O nome deverá ter mais que três letras. </small>
@@ -30,7 +30,7 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formCliente.sobreNome.$dirty && ctrl.formCliente.sobreNome.$invalid}">
 									<label ng-class="{'control-label': ctrl.formCliente.sobreNome.$dirty && ctrl.formCliente.sobreNome.$invalid}">Sobrenome:</label>
-									<input class="form-control" type="text" placeholder="Sobrenome" name="sobreNome" ng-model="ctrl.cliente.sobreNome" ng-minlength=3
+									<input class="form-control" type="text" placeholder="Sobrenome" name="sobreNome" ng-model="ctrl.cliente.dsSobreNome" ng-minlength=3
 										ng-maxlength=100 required />
 									<div class="alert alert-danger" ng-show="ctrl.formCliente.sobreNome.$dirty && ctrl.formCliente.sobreNome.$invalid">
 										<small ng-show="ctrl.formCliente.sobreNome.$error.required"> Informe o sobreNome. </small>
@@ -52,7 +52,7 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formCliente.email.$dirty && ctrl.formCliente.email.$invalid}">
 									<label ng-class="{'control-label': ctrl.formCliente.email.$dirty && ctrl.formCliente.email.$invalid}">Email:</label>
-									<input class="form-control" type="email" name="email" ng-model="ctrl.cliente.email" required />
+									<input class="form-control" type="email" name="email" ng-model="ctrl.cliente.dsEmail" required />
 									<div class="alert alert-danger" ng-show="ctrl.formCliente.email.$dirty && ctrl.formCliente.email.$invalid">
 										<small ng-show="ctrl.formCliente.email.$error"> O email é invalido. </small>
 									</div>
@@ -105,8 +105,8 @@
 										ng-repeat="cliente in clientesFiltrados = (ctrl.clientes | filter:ctrl.sensitiveSearch | filter:ctrl.figureOutTodosToDisplay |  orderBy:order)"
 										ng-click="ctrl.selectPerson(cliente, $index)">
 										<td>{{ cliente.id }}</td>
-										<td>{{ cliente.nome }} {{ cliente.sobreNome}}</td>
-										<td>{{ cliente.email}}</td>
+										<td>{{ cliente.dsNome }} {{ cliente.dsSobreNome}}</td>
+										<td>{{ cliente.dsEmail}}</td>
 										<td>{{ cliente.dtNacimento | date:"longDate" }}</td>
 									</tr>
 									<tr ng-show="clientesFiltrados == 0">

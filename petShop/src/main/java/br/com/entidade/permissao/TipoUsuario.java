@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  * The persistent class for the tb_tipo_usuario database table.
@@ -36,7 +39,8 @@ public class TipoUsuario implements Serializable {
 	private TipoUsuario tipoUsuarioPai;
 
 	// bi-directional many-to-one association to TipoUsuarioPapel
-	@OneToMany(mappedBy = "tipoUsuario")
+	@OneToMany(mappedBy = "tipoUsuario", fetch = FetchType.EAGER)
+	@JsonManagedReference("tipoUsuarioPapel")
 	private List<TipoUsuarioPapel> tipoUsuarioPapels;
 
 	public TipoUsuario() {

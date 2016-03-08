@@ -41,13 +41,20 @@ appAutenticacao.controller("loginController", [
 						}
 
 					}).error(function(data, status, headers, config) {
-						console.log("erro-----------------");
-						console.log(data, status);
+						switch (status) {
+							case 412: {
+								self.addAlert("", "Login ou a senha não confere.");
+								break;
+							}
+						}
+						$log.error(status, data, "Login ou a senha não confere");
+						$log.error(headers);
+						$log.error(config);
 					});
 				} else {
 					self.addAlert("", "Informe o email é a senha.");
 
-					self.formLogin.email.$setDirty(true);
+					self.formLogin.login.$setDirty(true);
 					self.formLogin.senha.$setDirty(true);
 
 				}

@@ -9,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
  * The persistent class for the tb_tipo_usuario_papel database table.
@@ -34,6 +35,7 @@ public class TipoUsuarioPapel implements Serializable {
 	// bi-directional many-to-one association to TipoUsuario
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_usuario")
+	@JsonBackReference("tipoUsuarioPapel")
 	private TipoUsuario tipoUsuario;
 
 	public TipoUsuarioPapel() {

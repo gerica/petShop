@@ -1,7 +1,7 @@
 package br.com.entidade.sistema;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
 	private String dsSobreNome;
 
 	@Column(name = "dt_nacimento")
-	private Timestamp dtNacimento;
+	private Date dtNacimento;
 
 	// bi-directional many-to-one association to Pet
 	@OneToMany(mappedBy = "cliente")
@@ -77,14 +77,6 @@ public class Cliente implements Serializable {
 		this.dsSobreNome = dsSobreNome;
 	}
 
-	public Timestamp getDtNacimento() {
-		return this.dtNacimento;
-	}
-
-	public void setDtNacimento(Timestamp dtNacimento) {
-		this.dtNacimento = dtNacimento;
-	}
-
 	public Pet addTbPet(Pet tbPet) {
 		getPets().add(tbPet);
 		return tbPet;
@@ -101,6 +93,14 @@ public class Cliente implements Serializable {
 
 	public void setPets(List<Pet> pets) {
 		this.pets = pets;
+	}
+
+	public Date getDtNacimento() {
+		return dtNacimento;
+	}
+
+	public void setDtNacimento(Date dtNacimento) {
+		this.dtNacimento = dtNacimento;
 	}
 
 }

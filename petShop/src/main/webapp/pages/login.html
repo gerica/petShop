@@ -10,7 +10,7 @@
 						<uib-alert ng-repeat="alert in loginCtrl.alerts" type="{{alert.type}}" close="loginCtrl.closeAlert($index)">{{alert.msg}}</uib-alert>
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" ng-model="loginCtrl.usuario.dsEmail" autofocus required>
+								<input class="form-control" placeholder="Login" name="login" type="text" ng-model="loginCtrl.usuario.dsLogin" autofocus required>
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="Senha" name="senha" type="password" value="" ng-model="loginCtrl.usuario.dsSenha" required>
