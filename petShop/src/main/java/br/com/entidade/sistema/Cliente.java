@@ -9,8 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.entidade.permissao.Usuario;
 
 /**
  * The persistent class for the tb_cliente database table.
@@ -41,6 +45,10 @@ public class Cliente implements Serializable {
 	// bi-directional many-to-one association to Pet
 	@OneToMany(mappedBy = "cliente")
 	private List<Pet> pets;
+	
+	@ManyToOne
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
 
 	public Cliente() {
 	}
@@ -101,6 +109,14 @@ public class Cliente implements Serializable {
 
 	public void setDtNacimento(Date dtNacimento) {
 		this.dtNacimento = dtNacimento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

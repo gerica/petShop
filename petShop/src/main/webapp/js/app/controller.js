@@ -2,6 +2,7 @@ appAutenticacao.controller("indexController", [
 		'$log', function($log) {
 			$log.info("Iniciando indexController");
 			var self = this;
+			self.usuario = {};
 
 			self.selectedTemplate = {
 				"path" : "pages/login.html"
@@ -39,6 +40,7 @@ appAutenticacao.controller("loginController", [
 						$scope.indexCtrl.selectedTemplate = {
 							"path" : "pages/tamplateSite.html"
 						}
+						$scope.indexCtrl.usuario = data;
 
 					}).error(function(data, status, headers, config) {
 						switch (status) {
@@ -47,9 +49,6 @@ appAutenticacao.controller("loginController", [
 								break;
 							}
 						}
-//						$log.error(status, data, "Login ou a senha não confere");
-//						$log.error(headers);
-//						$log.error(config);
 					});
 				} else {
 					self.addAlert("", "Informe o email é a senha.");
