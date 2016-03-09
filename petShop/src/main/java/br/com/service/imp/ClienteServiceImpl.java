@@ -34,6 +34,7 @@ public class ClienteServiceImpl implements ClienteService {
 	public List<Cliente> findAll() {
 		logger.info("ClienteServiceImpl.findAll()");
 		return (List<Cliente>) clienteRepository.findAll();
+
 	}
 
 	@Override

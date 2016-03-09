@@ -104,7 +104,7 @@
 									<tr
 										ng-repeat="cliente in clientesFiltrados = (ctrl.clientes | filter:ctrl.sensitiveSearch | filter:ctrl.figureOutTodosToDisplay |  orderBy:order)"
 										ng-click="ctrl.selectPerson(cliente, $index)">
-										<td>{{ cliente.id }}</td>
+										<td>{{ cliente.idCliente }}</td>
 										<td>{{ cliente.dsNome }} {{ cliente.dsSobreNome}}</td>
 										<td>{{ cliente.dsEmail}}</td>
 										<td>{{ cliente.dtNacimento | date:"longDate" }}</td>

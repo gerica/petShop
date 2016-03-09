@@ -44,7 +44,7 @@ appAutenticacao.controller("loginController", [
 
 					}).error(function(data, status, headers, config) {
 						switch (status) {
-							case 406: {
+							case 400: {
 								self.addAlert("", data.description);
 								break;
 							}

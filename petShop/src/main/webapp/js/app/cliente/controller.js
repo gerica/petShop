@@ -88,9 +88,8 @@ appAutenticacao.controller("clienteController", [
 
 			self.sensitiveSearch = function(cliente) {
 				if (self.search) {
-					return cliente.nome.toUpperCase().indexOf(self.search.toUpperCase()) == 0
-							|| cliente.sobreNome.toUpperCase().indexOf(self.search.toUpperCase()) == 0
-							|| cliente.email.toUpperCase().indexOf(self.search.toUpperCase()) == 0;
+					return cliente.dsNome.toUpperCase().indexOf(self.search.toUpperCase()) == 0							
+							|| cliente.dsEmail.toUpperCase().indexOf(self.search.toUpperCase()) == 0;
 				}
 				return true;
 			};
