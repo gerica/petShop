@@ -41,7 +41,7 @@ public class ClienteRest {
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("ADMIN")
+	@RolesAllowed("GERENTE")
 	public List<Cliente> findAllCliente() {
 		return clienteService.findAll();
 	}

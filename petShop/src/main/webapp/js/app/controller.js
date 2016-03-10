@@ -8,9 +8,9 @@ appAutenticacao.controller("indexController", [
 				"path" : "pages/login.html"
 			};
 
-			self.addUserHeader = function() {
-				$http.defaults.headers.common.Authorization = 'Basic ' + self.usuario.dsSenha;
-			}
+//			self.addUserHeader = function() {
+//				$http.defaults.headers.common.Authorization = 'Basic ' + self.usuario.dsSenha;
+//			}
 		}
 ]);
 
@@ -45,7 +45,7 @@ appAutenticacao.controller("loginController", [
 							"path" : "pages/tamplateSite.html"
 						}
 						$scope.indexCtrl.usuario = data;
-						$scope.indexCtrl.addUserHeader();
+//						$scope.indexCtrl.addUserHeader();
 
 					}).error(function(data, status, headers, config) {
 						switch (status) {

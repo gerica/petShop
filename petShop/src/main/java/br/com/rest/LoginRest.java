@@ -1,10 +1,12 @@
 package br.com.rest;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -27,6 +29,9 @@ public class LoginRest {
 	@Autowired
 	private LoginService loginService;
 
+	@Context
+	private HttpServletRequest httpServletRequest;
+
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -39,8 +44,11 @@ public class LoginRest {
 		} catch (PetShopBusinessExcption e) {
 			logger.error(e.getMessage());
 			throw new PetShopExceptionWebApplication(e.getMessage());
-
 		}
+
+		// We configure your Security Context here
+		httpServletRequest.getSession().setAttribute("jsessionid", usuarioLogin);
+
 		return Response.ok().entity(usuarioLogin).build();
 	}
 

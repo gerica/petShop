@@ -29,4 +29,11 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
+	<session-config>
+		<session-timeout>30</session-timeout>
+		<cookie-config>
+			<name>SESSIONID</name>
+		</cookie-config>
+	</session-config>
+
 </web-app>
