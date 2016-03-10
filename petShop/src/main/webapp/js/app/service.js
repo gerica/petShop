@@ -1,5 +1,6 @@
 appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 	var _login = function(userLogin) {
+//		$http.defaults.headers.common.Authorization = userLogin.dsLogin + '@' + userLogin.dsSenha;
 		return $http.post("/petShop/rest/loginRest/login", userLogin);
 	};
 	var _incluirCliente = function(cliente) {
@@ -19,10 +20,10 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		}).then(function(response) {
 			return response.data.map(function(item) {
 				return item;
-//				{
-//					cliente : item,
-//					nomeCompleto : item.nome + " " + item.sobreNome
-//				};
+				// {
+				// cliente : item,
+				// nomeCompleto : item.nome + " " + item.sobreNome
+				// };
 			});
 		});
 	};
@@ -32,7 +33,7 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 			return response;
 		});
 	};
-	
+
 	var _findAllRacaGato = function(val) {
 		return $http.get("/petShop/rest/petShopRest/findAllRacaGato").then(function(response) {
 			return response;
@@ -42,7 +43,7 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 	var _incluirCachorro = function(cliente) {
 		return $http.post("/petShop/rest/cachorroRest/incluir", cliente);
 	};
-	
+
 	var _findAllCachorro = function() {
 		return $http.get("/petShop/rest/cachorroRest/findAllCachorro", {
 			cache : false
@@ -54,7 +55,7 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 			cache : false
 		});
 	};
-	
+
 	var _incluirGato = function(gato) {
 		return $http.post("/petShop/rest/gatoRest/incluir", gato);
 	};
@@ -68,7 +69,7 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		incluirCachorro : _incluirCachorro,
 		findAllCachorro : _findAllCachorro,
 		findAllGato : _findAllGato,
-		incluirGato: _incluirGato,
+		incluirGato : _incluirGato,
 		findAllRacaGato : _findAllRacaGato,
 	};
 });

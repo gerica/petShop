@@ -1,5 +1,6 @@
 package br.com.service.imp;
 
+import org.glassfish.jersey.internal.util.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,19 @@ public class LoginServiceImp implements LoginService {
 	}
 
 	private void validarLogin(Usuario usuario, Usuario usuarioBD) throws PetShopBusinessExcption {
-		if (usuarioBD == null || !usuario.getDsSenha().equals(usuarioBD.getDsSenha())) {
-			throw new PetShopBusinessExcption("A senha informado não confere.");
+		if (usuarioBD == null) {
+			throw new PetShopBusinessExcption("Não existe nenhum usuário com esse Login.");
+		}
+
+		StringBuilder userSenhaView = new StringBuilder(usuario.getDsLogin());
+		userSenhaView.append(":");
+		userSenhaView.append(usuario.getDsSenha());
+
+		String usernameAndPassword = new String(Base64.encode(userSenhaView.toString().getBytes()));
+
+		if (!usernameAndPassword.equals(usuarioBD.getDsSenha())) {
+			throw new PetShopBusinessExcption("A senha não confere.");
+
 		}
 
 	}

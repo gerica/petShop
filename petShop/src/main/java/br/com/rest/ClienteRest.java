@@ -2,6 +2,7 @@ package br.com.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -40,6 +41,7 @@ public class ClienteRest {
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("ADMIN")
 	public List<Cliente> findAllCliente() {
 		return clienteService.findAll();
 	}

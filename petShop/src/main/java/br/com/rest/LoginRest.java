@@ -1,5 +1,6 @@
 package br.com.rest;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -30,6 +31,7 @@ public class LoginRest {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@PermitAll
 	public Response login(Usuario usuario) {
 		Usuario usuarioLogin = null;
 		try {

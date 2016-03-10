@@ -1,5 +1,5 @@
 appAutenticacao.controller("indexController", [
-		'$log', function($log) {
+		'$log', '$http', function($log, $http) {
 			$log.info("Iniciando indexController");
 			var self = this;
 			self.usuario = {};
@@ -7,6 +7,10 @@ appAutenticacao.controller("indexController", [
 			self.selectedTemplate = {
 				"path" : "pages/login.html"
 			};
+
+			self.addUserHeader = function() {
+				$http.defaults.headers.common.Authorization = 'Basic ' + self.usuario.dsSenha;
+			}
 		}
 ]);
 
@@ -41,6 +45,7 @@ appAutenticacao.controller("loginController", [
 							"path" : "pages/tamplateSite.html"
 						}
 						$scope.indexCtrl.usuario = data;
+						$scope.indexCtrl.addUserHeader();
 
 					}).error(function(data, status, headers, config) {
 						switch (status) {
