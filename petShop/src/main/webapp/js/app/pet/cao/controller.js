@@ -1,24 +1,24 @@
-appAutenticacao.controller("petCaoController", function($uibModal, $log, autencicacaoHttpFacade) {
+appAutenticacao.controller("petCaoController", function($uibModal, $log, petShopHttpFacade) {
 	$log.info("Iniciando petCaoController");
 	var self = this;
 	self.search;
-	self.cachorro
+	self.cachorro;
 	
 	self.selected = undefined;
 	self.alerts = [];
 	
-	autencicacaoHttpFacade.findAllRaca().then(function(response) {
+	petShopHttpFacade.findAllRaca().then(function(response) {
 		self.racas = response.data;
 	});
 
 	self.findAllRaca = function(val) {
 		$log.info("parkingHttpFacade.findAllRaca()");
-		return autencicacaoHttpFacade.findAllRaca();
+		return petShopHttpFacade.findAllRaca();
 	}
 
 	self.findCliente = function(val) {
 		$log.info("parkingHttpFacade.findCliente()");
-		return autencicacaoHttpFacade.findCliente(val);
+		return petShopHttpFacade.findCliente(val);
 	}
 
 	self.addAlert = function(type, msg) {
@@ -41,7 +41,7 @@ appAutenticacao.controller("petCaoController", function($uibModal, $log, autenci
 	self.salvar = function() {
 		self.closeAlert(0);
 		if (self.formPet.$valid) {
-			autencicacaoHttpFacade.incluirCachorro(self.cachorro).success(function(data, status, headers, config) {
+			petShopHttpFacade.incluirCachorro(self.cachorro).success(function(data, status, headers, config) {
 				$log.info("Cachorro inserido.");
 				self.formPet.$setPristine();
 				self.addAlert("success", "Registro cadastrado com sucesso.");
@@ -103,7 +103,7 @@ appAutenticacao.controller("petCaoController", function($uibModal, $log, autenci
 
 	self.findAllCachorro = function() {
 		$log.info("parkingHttpFacade.findAllCachorro()");
-		autencicacaoHttpFacade.findAllCachorro().success(function(data, status, headers, config) {
+		petShopHttpFacade.findAllCachorro().success(function(data, status, headers, config) {
 			self.cachorros = data;
 		}).error(function(data, status, headers, config) {
 			$log.error("erro ao buscar os cachorros");

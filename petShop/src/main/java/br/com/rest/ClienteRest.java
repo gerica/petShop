@@ -33,6 +33,7 @@ public class ClienteRest {
 	@POST
 	@Path(PATH_CLIENTE_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
 	public Response incluir(Cliente cliente) {
 		clienteService.incluir(cliente);
 		return Response.status(200).build();
@@ -49,6 +50,7 @@ public class ClienteRest {
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_VALOR)
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
 	public List<Cliente> findCliente(@QueryParam("valor") String valor) {
 		return clienteService.findByValor(valor);
 	}

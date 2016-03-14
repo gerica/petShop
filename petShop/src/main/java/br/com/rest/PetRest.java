@@ -2,6 +2,7 @@ package br.com.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -34,8 +35,9 @@ public class PetRest {
 	@POST
 	@Path(PATH_PET_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
 	public Response incluir(Pet pet) {
-		logger.info("CachorroRest.incluir()");
+		logger.info("PetRest.incluir()");
 		petService.incluir(pet);
 		return Response.status(200).build();
 	}
@@ -43,6 +45,7 @@ public class PetRest {
 	@GET
 	@Path(PATH_PET_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
 	public List<Pet> findAll() {
 		return petService.findAll();
 	}

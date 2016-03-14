@@ -9,9 +9,8 @@ import br.com.entidade.sistema.Cliente;
 
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, Integer> {
 
-	// @Query("SELECT c FROM Cliente c WHERE c.nome like %:valor%")
-	// List<Cliente> findByValor(@Param("valor") String valor);
 
+	@Query(value = "SELECT c FROM Cliente c LEFT JOIN FETCH c.pets WHERE UPPER(c.dsNome) like UPPER('%'||?1||'%')")
 	List<Cliente> findByDsNomeContainingIgnoreCase(String nome);
 
 	@Query(value = "SELECT c FROM Cliente c LEFT JOIN FETCH c.pets")

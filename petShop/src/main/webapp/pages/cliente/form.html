@@ -19,7 +19,8 @@
 							<div class="col-lg-4">
 								<div class="form-group" ng-class="{'has-error': ctrl.formCliente.nome.$dirty && ctrl.formCliente.nome.$invalid}">
 									<label ng-class="{'control-label': ctrl.formCliente.nome.$dirty && ctrl.formCliente.nome.$invalid}">Nome:</label>
-									<input class="form-control" type="text" placeholder="Nome" name="nome" ng-model="ctrl.cliente.dsNome" ng-minlength=3 ng-maxlength=100 required />
+									<input class="form-control" type="text" placeholder="Nome" name="nome" ng-model="ctrl.cliente.dsNome" ng-minlength=3 ng-maxlength=100
+										required />
 									<div class="alert alert-danger" ng-show="ctrl.formCliente.nome.$dirty && ctrl.formCliente.nome.$invalid ">
 										<small ng-show="ctrl.formCliente.nome.$error.required"> Informe o nome. </small>
 										<small ng-show="ctrl.formCliente.nome.$error.minlength"> O nome deverá ter mais que três letras. </small>
@@ -68,6 +69,7 @@
 			<!-- /.col-lg-12 -->
 			<div class="row">
 				<button type="submit" class="btn btn-default">Salvar</button>
+				<button type="button" class="btn btn-default" ng-click="ctrl.limparForm(ctrl.cliente)" ng-show="ctrl.cliente">Limpar</button>
 			</div>
 		</form>
 		</uib-tab> <uib-tab index="1" heading="Lista" ng-click="ctrl.findAllCliente()" active="ctrl.activeTabs[1]">
@@ -76,7 +78,7 @@
 				<form class="form-inline well well-sm">
 					<span class="fa fa-search"></span>
 					<div class="form-group">
-						<input type="text" class="form-control" id="search" ng-model="ctrl.search" placeholder="Pesquisar..." autofocus  focus="true" />
+						<input type="text" class="form-control" id="search" ng-model="ctrl.search" placeholder="Pesquisar..." autofocus focus="true" />
 					</div>
 				</form>
 			</div>
@@ -119,7 +121,7 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<th colspan="4"> Quantidade de registro: {{ctrl.clientes.length}}</th>
+										<th colspan="4">Quantidade de registro: {{ctrl.clientes.length}}</th>
 									</tr>
 								</tfoot>
 							</table>
@@ -134,11 +136,14 @@
 				<!-- /.panel -->
 			</div>
 			<!-- /.col-lg-12 -->
+		</div>
+		<!-- /.row --> 
 		</uib-tab>
+		<uib-tab index="0" heading="Pets" active="ctrl.activeTabs[2]" ng-show="ctrl.cliente">
+		olá
+		</uib-tab>
+		<!-- /.row -->
+		</uib-tabset>
 	</div>
-	<!-- /.row -->
-</div>
-<!-- /.row -->
-</uib-tabset>
 </div>
 <!-- /#page-wrapper -->

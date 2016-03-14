@@ -1,6 +1,7 @@
-appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
+appAutenticacao.factory("petShopHttpFacade", function($http) {
 	var _login = function(userLogin) {
-//		$http.defaults.headers.common.Authorization = userLogin.dsLogin + '@' + userLogin.dsSenha;
+		// $http.defaults.headers.common.Authorization = userLogin.dsLogin + '@'
+		// + userLogin.dsSenha;
 		return $http.post("/petShop/rest/loginRest/login", userLogin);
 	};
 	var _incluirCliente = function(cliente) {
@@ -28,48 +29,31 @@ appAutenticacao.factory("autencicacaoHttpFacade", function($http) {
 		});
 	};
 
-	var _findAllRaca = function(val) {
-		return $http.get("/petShop/rest/petShopRest/findAllRaca").then(function(response) {
+	var _findRacaByTipo = function(val) {
+		return $http.get("/petShop/rest/petShopRest/findRacaByTipo", {
+			params : {
+				valor : val.idTipoPet,
+			}
+		}).then(function(response) {
 			return response;
 		});
 	};
 
-	var _findAllRacaGato = function(val) {
-		return $http.get("/petShop/rest/petShopRest/findAllRacaGato").then(function(response) {
-			return response;
-		});
+	var _findAllTipoPet = function() {
+		return $http.get("/petShop/rest/petShopRest/findAllTipoPet");
 	};
 
-	var _incluirCachorro = function(cliente) {
-		return $http.post("/petShop/rest/cachorroRest/incluir", cliente);
-	};
-
-	var _findAllCachorro = function() {
-		return $http.get("/petShop/rest/cachorroRest/findAllCachorro", {
-			cache : false
-		});
-	};
-
-	var _findAllGato = function() {
-		return $http.get("/petShop/rest/gatoRest/findAllGato", {
-			cache : false
-		});
-	};
-
-	var _incluirGato = function(gato) {
-		return $http.post("/petShop/rest/gatoRest/incluir", gato);
-	};
+	var _incluirPet = function(pet) {
+		return $http.post("/petShop/rest/petRest/incluir", pet);
+	}
 
 	return {
 		login : _login,
 		incluirCliente : _incluirCliente,
 		findAllCliente : _findAllCliente,
 		findCliente : _findCliente,
-		findAllRaca : _findAllRaca,
-		incluirCachorro : _incluirCachorro,
-		findAllCachorro : _findAllCachorro,
-		findAllGato : _findAllGato,
-		incluirGato : _incluirGato,
-		findAllRacaGato : _findAllRacaGato,
+		findAllTipoPet : _findAllTipoPet,
+		findRacaByTipo : _findRacaByTipo,
+		incluirPet : _incluirPet,
 	};
 });

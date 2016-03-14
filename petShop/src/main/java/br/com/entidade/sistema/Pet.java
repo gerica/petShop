@@ -17,6 +17,9 @@ import javax.persistence.TemporalType;
 
 import br.com.entidade.auxiliar.Raca;
 import br.com.entidade.auxiliar.TipoPet;
+import br.com.entidade.permissao.Usuario;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * The persistent class for the tb_pet database table.
@@ -42,17 +45,22 @@ public class Pet implements Serializable {
 	// bi-directional many-to-one association to Raca
 	@ManyToOne
 	@JoinColumn(name = "id_raca")
-	private Raca tbRaca;
+	private Raca raca;
 
 	// bi-directional many-to-one association to TipoPet
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_pet")
-	private TipoPet tbTipoPet;
+	private TipoPet tipoPet;
 
 	// bi-directional many-to-one association to Cliente
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
+	@JsonBackReference("cliente")
 	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
 
 	public Pet() {
 	}
@@ -81,28 +89,36 @@ public class Pet implements Serializable {
 		this.dtNacimento = dtNacimento;
 	}
 
-	public Raca getTbRaca() {
-		return this.tbRaca;
-	}
-
-	public void setTbRaca(Raca tbRaca) {
-		this.tbRaca = tbRaca;
-	}
-
-	public TipoPet getTbTipoPet() {
-		return this.tbTipoPet;
-	}
-
-	public void setTbTipoPet(TipoPet tbTipoPet) {
-		this.tbTipoPet = tbTipoPet;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public TipoPet getTipoPet() {
+		return tipoPet;
+	}
+
+	public void setTipoPet(TipoPet tipoPet) {
+		this.tipoPet = tipoPet;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Raca getRaca() {
+		return raca;
+	}
+
+	public void setRaca(Raca raca) {
+		this.raca = raca;
 	}
 
 }

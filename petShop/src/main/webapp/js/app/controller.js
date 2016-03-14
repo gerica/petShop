@@ -15,7 +15,7 @@ appAutenticacao.controller("indexController", [
 ]);
 
 appAutenticacao.controller("loginController", [
-		'$scope', '$log', 'autencicacaoHttpFacade', function($scope, $log, autencicacaoHttpFacade) {
+		'$scope', '$log', 'petShopHttpFacade', function($scope, $log, petShopHttpFacade) {
 			$log.info("Iniciando loginController");
 			var self = this;
 			self.usuario;
@@ -38,7 +38,7 @@ appAutenticacao.controller("loginController", [
 				self.closeAlert(0);
 
 				if (self.formLogin.$valid) {
-					autencicacaoHttpFacade.login(self.usuario).success(function(data, status, headers, config) {
+					petShopHttpFacade.login(self.usuario).success(function(data, status, headers, config) {
 						$log.info("Login com sucesso.");
 
 						$scope.indexCtrl.selectedTemplate = {

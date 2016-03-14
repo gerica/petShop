@@ -1,11 +1,16 @@
 package br.com.service.imp;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.entidade.auxiliar.Raca;
+import br.com.entidade.auxiliar.TipoPet;
 import br.com.repository.RacaRepository;
+import br.com.repository.TipoPetRepository;
 import br.com.service.UtilService;
 
 @Service
@@ -15,5 +20,24 @@ public class UtilServiceImpl implements UtilService {
 
 	@Autowired
 	private RacaRepository racaRepository;
+
+	@Autowired
+	private TipoPetRepository tipoPetRepository;
+
+	@Override
+	public List<TipoPet> findAllTipoPet() {
+		logger.info("UtilServiceImpl.findAllTipoPet()");
+		return (List<TipoPet>) tipoPetRepository.findAll();
+	}
+
+	@Override
+	public List<Raca> findAllRaca() {
+		return (List<Raca>) racaRepository.findAll();
+	}
+
+	@Override
+	public List<Raca> findRacaByTipo(Integer idTipoPet) {
+		return racaRepository.findAllByTipoPet(idTipoPet);
+	}
 
 }

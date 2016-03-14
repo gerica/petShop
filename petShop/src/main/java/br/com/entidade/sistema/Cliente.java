@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.entidade.permissao.Usuario;
 
 /**
@@ -44,6 +46,7 @@ public class Cliente implements Serializable {
 
 	// bi-directional many-to-one association to Pet
 	@OneToMany(mappedBy = "cliente")
+	@JsonManagedReference("cliente")
 	private List<Pet> pets;
 	
 	@ManyToOne

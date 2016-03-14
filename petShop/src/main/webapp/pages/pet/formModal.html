@@ -1,4 +1,4 @@
-<form role="form" name="ctrl.formPet" novalidate ng-submit="ctrl.salvar()">
+<form role="form" name="petCtrl.formPet" novalidate ng-submit="petCtrl.salvar()">
 	<div class="modal-header">
 		<h3 class="modal-title">Cadastro Pet</h3>
 	</div>
@@ -6,22 +6,19 @@
 		<div class="panel panel-default">
 			<div class="tab-content">
 				<div class="row">
-					<uib-alert ng-repeat="alert in ctrl.alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}} </uib-alert>
-					<!-- /.row -->
+					<uib-alert ng-repeat="alert in petCtrl.alerts" type="{{alert.type}}" close="petCtrl.closeAlert($index)">{{alert.msg}} </uib-alert>
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">Dados do Pet</div>
 							<div class="panel-body">
 								<div class="col-lg-4">
-									<label ng-class="{'control-label': ctrl.formPet.tipoPet.$dirty && ctrl.formPet.tipoPet.$invalid}">Tipo:</label>
+									<label ng-class="{'control-label': petCtrl.formPet.tipoPet.$dirty && petCtrl.formPet.tipoPet.$invalid}">Tipo:</label>
 									<div class="form-group">
-										<input type="radio" name="tipoPet" ng-model="ctrl.tipoPet" value="Cachorro"> Cachorro
-										 <input type="radio" name="tipoPet" ng-model="ctrl.tipoPet" value="Gato"> Gato
+										<input type="radio" name="tipoPet" ng-model="petCtrl.tipoPet" value="Cachorro"> Cachorro <input type="radio" name="tipoPet"
+											ng-model="petCtrl.tipoPet" value="Gato"> Gato
 									</div>
 								</div>
-								<!-- /.row (nested) -->
 							</div>
-							<!-- /.panel-body -->
 						</div>
 						<!-- /.panel -->
 					</div>
@@ -31,7 +28,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="submit" class="btn btn-primary">Salvar</button>
-		<button type="button" class="btn btn-warning" ng-click="ctrl.limparForm(ctrl.cachorro)" ng-show="ctrl.cachorro">Limpar</button>
-		<button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Cancel</button>
+		<button type="button" class="btn btn-warning" ng-click="petCtrl.limparForm(petCtrl.cachorro)" ng-show="petCtrl.cachorro">Limpar</button>
+		<button class="btn btn-warning" type="button" ng-click="petCtrl.cancel()">Cancel</button>
 	</div>
 </form>

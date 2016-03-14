@@ -1,0 +1,67 @@
+<form role="form" name="petCtrl.formPet" novalidate ng-submit="petCtrl.salvar()">
+	<uib-alert ng-repeat="alert in petCtrl.alerts" type="{{alert.type}}" close="petCtrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+	<div ng-class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Dados do pet</div>
+			<div class="panel-body">
+				<div class="col-lg-4">
+					<label ng-class="{'control-label': petCtrl.formPet.tipoPet.$dirty && petCtrl.formPet.tipoPet.$invalid}">Tipo:</label>
+					<div class="form-group">
+						<label ng-repeat="tipo in petCtrl.tiposPet">
+							<input type="radio" name="tipoPet" ng-model="petCtrl.pet.tipoPet" ng-value={{tipo}} ng-click="petCtrl.findRacaByTipo(tipo)"> {{tipo.dsNome}}
+						</label>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<label ng-class="{'control-label': petCtrl.formPet.raca.$dirty && petCtrl.formPet.raca.$invalid}">Proprietário:</label>
+						<input type="text" ng-model="petCtrl.pet.cliente" placeholder="Nome do proprietário"
+							uib-typeahead="cliente as cliente.dsNome  for cliente in petCtrl.findCliente($viewValue)" typeahead-loading="loadingClientes"
+							typeahead-no-results="semResultado" class="form-control" typeahead-min-length=3> <i ng-show="loadingClientes"
+							class="glyphicon glyphicon-refresh"></i>
+						<div ng-show="semResultado">
+							<i class="glyphicon glyphicon-remove"></i> Sem resultado.
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group" ng-class="{'has-error': petCtrl.formPet.raca.$dirty && petCtrl.formPet.raca.$invalid}">
+						<label ng-class="{'control-label': petCtrl.formPet.raca.$dirty && petCtrl.formPet.raca.$invalid}">Raça:</label>
+						<input type="text" ng-model="petCtrl.pet.raca" placeholder="Raça" name="raca"
+							uib-typeahead="raca as raca.dsNome for raca in petCtrl.racas | filter:{dsNome:$viewValue} | limitTo:8" class="form-control">
+
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group" ng-class="{'has-error': petCtrl.formPet.nome.$dirty && petCtrl.formPet.nome.$invalid}">
+						<label ng-class="{'control-label': petCtrl.formPet.nome.$dirty && petCtrl.formPet.nome.$invalid}">nome:</label>
+						<input class="form-control" type="text" placeholder="nome" name="nome" ng-model="petCtrl.pet.dsNome" ng-minlength=3 ng-maxlength=100 required />
+						<div class="alert alert-danger" ng-show="petCtrl.formPet.nome.$dirty && petCtrl.formPet.nome.$invalid">
+							<small ng-show="petCtrl.formPet.nome.$error.required"> Informe o nome. </small>
+							<small ng-show="petCtrl.formPet.nome.$error.minlength"> O nome deverá ter mais que três letras. </small>
+							<small ng-show="petCtrl.formPet.nome.$error.maxlength"> O nome não poderá ter mais que cem letras. </small>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group" ng-class="{'has-error': petCtrl.formPet.dtNacimento.$dirty && petCtrl.formPet.dtNacimento.$invalid}">
+						<label ng-class="{'control-label': petCtrl.formPet.dtNacimento.$dirty && petCtrl.formPet.dtNacimento.$invalid}">Data Nacimento:</label>
+						<input class="form-control" type="date" name="dtNacimento" ng-model="petCtrl.pet.dtNacimento" required />
+						<div class="alert alert-danger" ng-show="petCtrl.formPet.dtNacimento.$dirty && petCtrl.formPet.dtNacimento.$invalid">
+							<small ng-show="petCtrl.formPet.dtNacimento.$error"> A data de nacimento é invalida. </small>
+						</div>
+					</div>
+				</div>
+				<!-- /.row (nested) -->
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+	<div class="row" ng-show="!petCtrl.isModal">
+		<button type="submit" class="btn btn-default">Salvar</button>
+		<button type="button" class="btn btn-default" ng-click="petCtrl.limparForm(petCtrl.pet)" ng-show="petCtrl.pet">Limpar</button>
+	</div>
+</form>

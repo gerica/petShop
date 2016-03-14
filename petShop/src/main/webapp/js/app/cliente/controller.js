@@ -2,15 +2,10 @@ appAutenticacao.controller("clienteController", [
 		'$scope',
 		'$uibModal',
 		'$log',
-		'autencicacaoHttpFacade',
-		function($scope, $uibModal, $log, autencicacaoHttpFacade) {
+		'petShopHttpFacade',
+		function($scope, $uibModal, $log, petShopHttpFacade) {
 			var self = this;
-
-			// FUNCIONALIDADE DA TAB
-			self.tab = 'first';
-			self.openTab = function(tab) {
-				self.tab = tab;
-			};
+			self.cliente;
 
 			// FUNCTIONALIDADE DE CADASTRO
 			$log.info("Iniciando clienteController");
@@ -22,6 +17,7 @@ appAutenticacao.controller("clienteController", [
 					type : type
 				});
 			};
+			
 			self.closeAlert = function(index) {
 				self.alerts.splice(index, 1);
 			};
@@ -30,7 +26,7 @@ appAutenticacao.controller("clienteController", [
 				self.closeAlert(0);
 				if (self.formCliente.$valid) {
 					self.cliente.usuario = $scope.indexCtrl.usuario;
-					autencicacaoHttpFacade.incluirCliente(self.cliente).success(function(data, status, headers, config) {
+					petShopHttpFacade.incluirCliente(self.cliente).success(function(data, status, headers, config) {
 						$log.info("Cliente inserido.");
 						self.addAlert("success", "Registro cadastrado com sucesso.");
 						self.formCliente.$setPristine();
@@ -50,9 +46,11 @@ appAutenticacao.controller("clienteController", [
 					self.formCliente.email.$setDirty(true);
 				}
 			};
+			
 			self.limparForm = function(cliente) {
 				for ( var key in cliente) {
-					delete self.cliente[key];
+//					delete self.cliente[key];
+					self.cliente = null;
 				}
 			};
 
@@ -60,8 +58,7 @@ appAutenticacao.controller("clienteController", [
 			$log.info("Iniciando listaClienteController");
 			self.search;
 			self.itemsPerPage = 10;
-			self.currentPage = 1;
-			self.clientes = [];
+			self.currentPage = 1;			
 			self.activeTabs = [
 					true, false
 			];
@@ -88,7 +85,7 @@ appAutenticacao.controller("clienteController", [
 
 			self.sensitiveSearch = function(cliente) {
 				if (self.search) {
-					return cliente.dsNome.toUpperCase().indexOf(self.search.toUpperCase()) == 0							
+					return cliente.dsNome.toUpperCase().indexOf(self.search.toUpperCase()) == 0
 							|| cliente.dsEmail.toUpperCase().indexOf(self.search.toUpperCase()) == 0;
 				}
 				return true;
@@ -96,13 +93,12 @@ appAutenticacao.controller("clienteController", [
 
 			self.findAllCliente = function() {
 				$log.info("parkingHttpFacade.findAllCliente()");
-				autencicacaoHttpFacade.findAllCliente().success(function(data, status, headers, config) {
+				petShopHttpFacade.findAllCliente().success(function(data, status, headers, config) {
 					self.clientes = data;
 				}).error(function(data, status, headers, config) {
 					console.log("erro-----------------");
 					console.log(data, status);
 				});
-				self.openTab('second');
 			}
 
 			// funcionalidade de modal
@@ -120,8 +116,8 @@ appAutenticacao.controller("clienteController", [
 					}
 				});
 
-				modalInstance.result.then(function(cachorro) {
-					self.cliente = cachorro;
+				modalInstance.result.then(function(clienteResponse) {
+					self.cliente = clienteResponse;
 					self.cliente.dtNacimento = new Date(self.cliente.dtNacimento);
 					self.activeTabs = [
 							true, false
@@ -139,7 +135,7 @@ appAutenticacao.controller('modalDetalheClienteController', function($uibModalIn
 	var self = this;
 	self.cliente = cliente;
 
-	self.alterar = function() {
+	self.selecionar = function() {
 		$uibModalInstance.close(self.cliente);
 	};
 

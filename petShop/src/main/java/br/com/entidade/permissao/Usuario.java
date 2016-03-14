@@ -1,7 +1,6 @@
 package br.com.entidade.permissao;
 
 import java.io.Serializable;
-import java.security.Principal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario implements Serializable, Principal {
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -93,11 +92,6 @@ public class Usuario implements Serializable, Principal {
 
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
-	}
-
-	@Override
-	public String getName() {
-		return getDsNome();
 	}
 
 	@Override
