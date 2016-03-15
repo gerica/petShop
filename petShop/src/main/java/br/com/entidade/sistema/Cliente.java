@@ -2,7 +2,6 @@ package br.com.entidade.sistema;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.entidade.permissao.Usuario;
 
@@ -45,12 +41,12 @@ public class Cliente implements Serializable {
 	private Date dtNacimento;
 
 	// bi-directional many-to-one association to Pet
-	@OneToMany(mappedBy = "cliente")
-	@JsonManagedReference("cliente")
-	private List<Pet> pets;
-	
+	// @OneToMany(mappedBy = "cliente")
+	// @JsonManagedReference("cliente")
+	// private List<Pet> pets;
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	public Cliente() {
@@ -86,24 +82,6 @@ public class Cliente implements Serializable {
 
 	public void setDsSobreNome(String dsSobreNome) {
 		this.dsSobreNome = dsSobreNome;
-	}
-
-	public Pet addTbPet(Pet tbPet) {
-		getPets().add(tbPet);
-		return tbPet;
-	}
-
-	public Pet removeTbPet(Pet tbPet) {
-		getPets().remove(tbPet);
-		return tbPet;
-	}
-
-	public List<Pet> getPets() {
-		return pets;
-	}
-
-	public void setPets(List<Pet> pets) {
-		this.pets = pets;
 	}
 
 	public Date getDtNacimento() {

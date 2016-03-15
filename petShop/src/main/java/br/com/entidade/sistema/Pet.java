@@ -19,8 +19,6 @@ import br.com.entidade.auxiliar.Raca;
 import br.com.entidade.auxiliar.TipoPet;
 import br.com.entidade.permissao.Usuario;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 /**
  * The persistent class for the tb_pet database table.
  * 
@@ -55,7 +53,6 @@ public class Pet implements Serializable {
 	// bi-directional many-to-one association to Cliente
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
-	@JsonBackReference("cliente")
 	private Cliente cliente;
 
 	@ManyToOne

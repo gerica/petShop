@@ -15,8 +15,8 @@
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label ng-class="{'control-label': petCtrl.formPet.raca.$dirty && petCtrl.formPet.raca.$invalid}">Proprietário:</label>
-						<input type="text" ng-model="petCtrl.pet.cliente" placeholder="Nome do proprietário"
-							uib-typeahead="cliente as cliente.dsNome  for cliente in petCtrl.findCliente($viewValue)" typeahead-loading="loadingClientes"
+						<input type="text" ng-model="petCtrl.cliente" placeholder="Nome do proprietário"
+							uib-typeahead="cliente as cliente.nomeCompleto for cliente in petCtrl.findCliente($viewValue)" typeahead-loading="loadingClientes"
 							typeahead-no-results="semResultado" class="form-control" typeahead-min-length=3> <i ng-show="loadingClientes"
 							class="glyphicon glyphicon-refresh"></i>
 						<div ng-show="semResultado">

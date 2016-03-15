@@ -100,7 +100,7 @@ appAutenticacao.controller("clienteController", [
 					console.log(data, status);
 				});
 			}
-
+			
 			// funcionalidade de modal
 			self.open = function(size, cliente) {
 

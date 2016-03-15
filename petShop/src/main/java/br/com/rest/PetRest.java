@@ -26,6 +26,7 @@ public class PetRest {
 	public static final String PATH_PET_REST = "petRest";
 	public static final String PATH_PET_REST_INCLUIR = "incluir";
 	public static final String PATH_PET_REST_FIND_ALL = "findAll";
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(PetRest.class);
 
