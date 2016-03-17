@@ -128,6 +128,23 @@ appAutenticacao.controller("clienteController", [
 				});
 			};
 
+			// FUNCIONALIDADES DE PETS
+			self.pages = {
+				"pets": "pages/cliente/pets.html",
+			};
+
+			self.findPetByCliente = function(){
+				$log.info("clienteController.findPetByCliente()");
+				petShopHttpFacade.findPetByCliente(self.cliente).success(function(data, status, headers, config) {
+					self.pets = data;
+					console.log(self.pets);
+				}).error(function(data, status, headers, config) {
+					console.log("erro-----------------");
+					console.log(data, status);
+				});
+
+			}
+
 		}
 ]);
 

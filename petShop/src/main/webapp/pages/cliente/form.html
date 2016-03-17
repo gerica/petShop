@@ -139,8 +139,8 @@
 		</div>
 		<!-- /.row --> 
 		</uib-tab>
-		<uib-tab index="0" heading="Pets" active="ctrl.activeTabs[2]" ng-show="ctrl.cliente">
-		olá
+		<uib-tab index="0" heading="Pets" active="ctrl.activeTabs[2]" ng-show="ctrl.cliente"  ng-click="ctrl.findPetByCliente()">
+				<div ng-include="ctrl.pages.pets"></div>
 		</uib-tab>
 		<!-- /.row -->
 		</uib-tabset>

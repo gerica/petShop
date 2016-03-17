@@ -20,7 +20,6 @@ appAutenticacao.controller("petController", [
                 type: type
             });
         };
-
         self.closeAlert = function (index) {
             self.alerts.splice(index, 1);
         };
@@ -138,7 +137,6 @@ appAutenticacao.controller("petController", [
         }
 
         self.findAllPet();
-        console.log(self.pets);
 
         // funcionalidade de modal
         self.open = function (size, pet) {
@@ -158,7 +156,10 @@ appAutenticacao.controller("petController", [
             modalInstance.result.then(function (objResponse) {
                 self.pet = objResponse;
                 self.pet.dtNacimento = new Date(self.pet.dtNacimento);
-                self.cliente = self.pet.cliente.dsNome + ' '+ self.pet.cliente.dsSobreNome;
+                self.cliente = {
+                    cliente: self.pet.cliente,
+                    nomeCompleto : self.pet.cliente.dsNome + ' '+ self.pet.cliente.dsSobreNome,
+                };
                 self.activeTabs = [
                     true, false
                 ];

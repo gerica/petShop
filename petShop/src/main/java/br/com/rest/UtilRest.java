@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.entidade.auxiliar.Raca;
 import br.com.entidade.auxiliar.TipoPet;
+import br.com.entidade.permissao.TipoUsuario;
 import br.com.service.UtilService;
 
 @Component
@@ -24,6 +25,7 @@ public class UtilRest {
 	private static final String PATH_TIPO_PET_REST_FIND_ALL = "findAllTipoPet";
 	private static final String PATH_RACA_REST_FIND_ALL = "findAllRaca";
 	private static final String PATH_RACA_REST_FIND_BY_TIPO = "findRacaByTipo";
+	private static final String PATH_RACA_REST_FIND_ALL_TIPO_USUARIO = "findAllTipoUsuario";
 
 	@Autowired
 	private UtilService utilService;
@@ -32,7 +34,7 @@ public class UtilRest {
 	@Path(PATH_TIPO_PET_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("GERENTE")
-	public List<TipoPet> findAllCliente() {
+	public List<TipoPet> findAllTipoPet() {
 		return utilService.findAllTipoPet();
 	}
 
@@ -50,6 +52,14 @@ public class UtilRest {
 	@RolesAllowed("GERENTE")
 	public List<Raca> findRacaByTipo(@QueryParam("valor") Integer idTipoPet) {
 		return utilService.findRacaByTipo(idTipoPet);
+	}
+	
+	@GET
+	@Path(PATH_RACA_REST_FIND_ALL_TIPO_USUARIO)
+	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
+	public List<TipoUsuario> findAllTipoUsuario() {
+		return utilService.findAllTipoUsuario();
 	}
 
 }

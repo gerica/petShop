@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.entidade.auxiliar.Raca;
 import br.com.entidade.auxiliar.TipoPet;
+import br.com.entidade.permissao.TipoUsuario;
 import br.com.repository.RacaRepository;
 import br.com.repository.TipoPetRepository;
+import br.com.repository.TipoUsuarioRepository;
 import br.com.service.UtilService;
 
 @Service
@@ -23,6 +25,9 @@ public class UtilServiceImpl implements UtilService {
 
 	@Autowired
 	private TipoPetRepository tipoPetRepository;
+	
+	@Autowired
+	private TipoUsuarioRepository tipoUsuarioRepository;
 
 	@Override
 	public List<TipoPet> findAllTipoPet() {
@@ -38,6 +43,11 @@ public class UtilServiceImpl implements UtilService {
 	@Override
 	public List<Raca> findRacaByTipo(Integer idTipoPet) {
 		return racaRepository.findAllByTipoPet(idTipoPet);
+	}
+
+	@Override
+	public List<TipoUsuario> findAllTipoUsuario() {
+		return (List<TipoUsuario>) tipoUsuarioRepository.findAll();
 	}
 
 }

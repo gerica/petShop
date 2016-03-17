@@ -26,4 +26,14 @@ public class PetServiceImpl implements PetService {
 		return (List<Pet>) petRepository.findAll();
 	}
 
+	@Override
+	public List<Pet> findPetByCliente(Integer idCliente) {
+		return (List<Pet>) petRepository.findPetByCliente(idCliente);
+	}
+
+	@Override
+	public List<Pet> findPetByDsNome(String valor) {
+		return (List<Pet>) petRepository.findPetByDsNome(valor);
+	}
+
 }

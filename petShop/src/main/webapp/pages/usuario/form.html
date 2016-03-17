@@ -1,0 +1,20 @@
+<div id="page-wrapper" ng-controller="usuarioController as usuarioCtrl">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Usuário</h1>
+		</div>
+		<!-- /.col-lg-12 -->
+	</div>
+	<div class="tab-content">
+		<uib-tabset> 
+			<uib-tab index="0" heading="Cadastro" active="usuarioCtrl.activeTabs[0]">
+				<div ng-include="usuarioCtrl.pages.cadastro"></div>
+			</uib-tab> 
+			<uib-tab index="1" active="usuarioCtrl.activeTabs[1]" heading="Lista" ng-click="usuarioCtrl.findAllPet()">
+				<div ng-include="usuarioCtrl.pages.lista"></div> 
+			</uib-tab> 
+		</uib-tabset>
+	</div>
+
+</div>
+<!-- /#page-wrapper -->

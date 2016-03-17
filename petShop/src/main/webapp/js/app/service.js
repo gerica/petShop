@@ -4,9 +4,11 @@ appAutenticacao.factory("petShopHttpFacade", function ($http) {
         // + userLogin.dsSenha;
         return $http.post("/petShop/rest/loginRest/login", userLogin);
     };
+
     var _incluirCliente = function (cliente) {
         return $http.post("/petShop/rest/clienteRest/incluir", cliente);
     };
+
     var _findAllCliente = function () {
         return $http.get("/petShop/rest/clienteRest/findAllCliente", {
             cache: false
@@ -45,6 +47,30 @@ appAutenticacao.factory("petShopHttpFacade", function ($http) {
         });
     };
 
+    var _findPetByCliente = function (val) {
+        return $http.get("/petShop/rest/petRest/findPetByCliente", {
+            params: {
+                valor: val.idCliente,
+            }
+        });
+    };
+
+    var _findPetByDsNome = function (val) {
+        return $http.get("/petShop/rest/petRest/findPetByDsNome", {
+            params: {
+                valor: val,
+            }
+        });
+    };
+
+    var _findAllTipoUsuario = function () {
+        return $http.get("/petShop/rest/petShopRest/findAllTipoUsuario");
+    };
+
+    var _incluirUsuario = function (usuario) {
+        return $http.post("/petShop/rest/usuarioRest/incluir", usuario);
+    }
+
     return {
         login: _login,
         incluirCliente: _incluirCliente,
@@ -54,5 +80,9 @@ appAutenticacao.factory("petShopHttpFacade", function ($http) {
         findRacaByTipo: _findRacaByTipo,
         incluirPet: _incluirPet,
         findAllPet: _findAllPet,
+        findPetByCliente: _findPetByCliente,
+        findPetByDsNome: _findPetByDsNome,
+        findAllTipoUsuario: _findAllTipoUsuario,
+        incluirUsuario: _incluirUsuario,
     };
 });

@@ -8,7 +8,7 @@
 					<label ng-class="{'control-label': petCtrl.formPet.tipoPet.$dirty && petCtrl.formPet.tipoPet.$invalid}">Tipo:</label>
 					<div class="form-group">
 						<label ng-repeat="tipo in petCtrl.tiposPet">
-							<input type="radio" name="tipoPet" ng-model="petCtrl.pet.tipoPet" ng-value={{tipo}} ng-click="petCtrl.findRacaByTipo(tipo)"> {{tipo.dsNome}}
+							<input type="radio" name="tipoPet" ng-model="petCtrl.pet.tipoPet" ng-value="tipo" ng-checked="(petCtrl.pet.tipoPet.idTipoPet == tipo.idTipoPet)" ng-click="petCtrl.findRacaByTipo(tipo)"> {{tipo.dsNome}}
 						</label>
 					</div>
 				</div>

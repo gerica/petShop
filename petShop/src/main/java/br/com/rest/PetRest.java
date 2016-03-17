@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,7 +27,8 @@ public class PetRest {
 	public static final String PATH_PET_REST = "petRest";
 	public static final String PATH_PET_REST_INCLUIR = "incluir";
 	public static final String PATH_PET_REST_FIND_ALL = "findAll";
-	
+	public static final String PATH_PET_REST_FIND_PET_BY_CLIENTE = "findPetByCliente";
+	public static final String PATH_PET_REST_FIND_PET_BY_DS_NOME = "findPetByDsNome";
 
 	private static final Logger logger = LoggerFactory.getLogger(PetRest.class);
 
@@ -42,13 +44,29 @@ public class PetRest {
 		petService.incluir(pet);
 		return Response.status(200).build();
 	}
-	
+
 	@GET
 	@Path(PATH_PET_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
 	@RolesAllowed("GERENTE")
 	public List<Pet> findAll() {
 		return petService.findAll();
+	}
+	
+	@GET
+	@Path(PATH_PET_REST_FIND_PET_BY_CLIENTE)
+	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
+	public List<Pet> findPetByCliente(@QueryParam("valor") Integer idCliente) {
+		return petService.findPetByCliente(idCliente);
+	}
+
+	@GET
+	@Path(PATH_PET_REST_FIND_PET_BY_DS_NOME)
+	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed("GERENTE")
+	public List<Pet> findPetByDsNome(@QueryParam("valor") String valor) {
+		return petService.findPetByDsNome(valor);
 	}
 
 }

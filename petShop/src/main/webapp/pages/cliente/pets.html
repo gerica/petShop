@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">Lista de Pets</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th ng-click="order = '-tipoPet.dsNome'; ctrl.tipoOrderAsc=false;" ng-show="ctrl.tipoOrderAsc">Tipo Pet <span class="fa  fa-sort-up"></span></th>
+								<th ng-click="order = 'tipoPet.dsNome'; ctrl.tipoOrderAsc=true;" ng-show="!ctrl.tipoOrderAsc">Tipo Pet <span class="fa fa-sort-desc"></span></th>
+								<th ng-click="order = '-dsNome'; ctrl.tipoOrderAsc=false;" ng-show="ctrl.tipoOrderAsc">Nome <span class="fa  fa-sort-up"></span></th>
+								<th ng-click="order = 'dsNome'; ctrl.tipoOrderAsc=true;" ng-show="!ctrl.tipoOrderAsc">Nome <span class="fa fa-sort-desc"></span></th>
+								<th ng-click="order = '-dtNacimento'; ctrl.tipoOrderAsc=false;" ng-show="ctrl.tipoOrderAsc">Data Nacimento <span class="fa  fa-sort-up"></span></th>
+								<th ng-click="order = 'dtNacimento'; ctrl.tipoOrderAsc=true;" ng-show="!ctrl.tipoOrderAsc">Data Nacimento <span class="fa fa-sort-desc"></span></th>								
+								<th ng-click="order = '-raca.dsNome'; ctrl.tipoOrderAsc=false;" ng-show="ctrl.tipoOrderAsc">Raça <span class="fa  fa-sort-up"></span></th>
+								<th ng-click="order = 'raca.dsNome'; ctrl.tipoOrderAsc=true;" ng-show="!ctrl.tipoOrderAsc">Raça <span class="fa fa-sort-desc"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="pet in petsFiltrados = (ctrl.pets | orderBy:order)">
+								<td>{{ pet.id }}</td>
+								<td>{{ pet.tipoPet.dsNome }}</td>
+								<td>{{ pet.dsNome }}</td>
+								<td>{{ pet.dtNacimento | date:"longDate" }}</td>
+								<td>{{ pet.raca.dsNome}}</td>
+							</tr>
+							<tr ng-show="petsFiltrados == 0">
+								<td colspan="5">
+									<div class="alert alert-info">
+										<p class="text-center">Nenhum pet cadastrado</p>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
