@@ -3,7 +3,7 @@ CREATE TABLE public.tb_papel (
                 ds_papel VARCHAR(255) NOT NULL,
                 CONSTRAINT tb_papel_pkey PRIMARY KEY (id_papel)
 );
-COMMENT ON TABLE public.tb_papel IS 'Tabela responsável pelos papeis.';
+COMMENT ON TABLE public.tb_papel IS 'Tabela responsÃ¡vel pelos papeis.';
 
 
 CREATE TABLE public.tb_tipo_usuario (
@@ -12,7 +12,7 @@ CREATE TABLE public.tb_tipo_usuario (
                 id_tipo_usuario_pai INTEGER,
                 CONSTRAINT tb_tipo_usuario_pkey PRIMARY KEY (id_tipo_usuario)
 );
-COMMENT ON TABLE public.tb_tipo_usuario IS 'Tabela responsável pelos tipos de usuários. Exemplo, administrador, operador, consultor.';
+COMMENT ON TABLE public.tb_tipo_usuario IS 'Tabela responsÃ¡vel pelos tipos de usuÃ¡rios. Exemplo, administrador, operador, consultor.';
 
 
 CREATE TABLE public.tb_tipo_usuario_papel (
@@ -33,7 +33,7 @@ CREATE TABLE public.tb_usuario (
                 id_tipo_usuario INTEGER NOT NULL,
                 CONSTRAINT tb_usuario_pkey PRIMARY KEY (id_usuario)
 );
-COMMENT ON TABLE public.tb_usuario IS 'Tabela responsável pelos usuários do sistema.';
+COMMENT ON TABLE public.tb_usuario IS 'Tabela responsÃ¡vel pelos usuÃ¡rios do sistema.';
 
 
 CREATE TABLE public.tb_tipo_pet (
@@ -41,7 +41,7 @@ CREATE TABLE public.tb_tipo_pet (
                 ds_nome VARCHAR(255) NOT NULL,
                 CONSTRAINT tb_tipo_pet_pkey PRIMARY KEY (id_tipo_pet)
 );
-COMMENT ON TABLE public.tb_tipo_pet IS 'tabela responsável por armazenar os tipos de pet.';
+COMMENT ON TABLE public.tb_tipo_pet IS 'tabela responsÃ¡vel por armazenar os tipos de pet.';
 
 
 CREATE TABLE public.tb_raca (
@@ -50,7 +50,7 @@ CREATE TABLE public.tb_raca (
                 ds_nome VARCHAR(255) NOT NULL,
                 CONSTRAINT tb_raca_pkey PRIMARY KEY (id_raca)
 );
-COMMENT ON TABLE public.tb_raca IS 'Tabela responsável pelas raças.';
+COMMENT ON TABLE public.tb_raca IS 'Tabela responsÃ¡vel pelas raÃ§as.';
 
 
 CREATE TABLE public.tb_cliente (
@@ -74,7 +74,7 @@ CREATE TABLE public.tb_pet (
                 id_usuario INTEGER NOT NULL,
                 CONSTRAINT tb_pet_pkey PRIMARY KEY (id)
 );
-COMMENT ON TABLE public.tb_pet IS 'tabela responsável pelos pets. Cachorro, gato, etc.';
+COMMENT ON TABLE public.tb_pet IS 'tabela responsÃ¡vel pelos pets. Cachorro, gato, etc.';
 COMMENT ON COLUMN public.tb_pet.id_tipo_pet IS 'tipo de pet.';
 
 
