@@ -18,7 +18,7 @@ appAutenticacao.controller("usuarioController", [
 		};
 		
 		self.closeAlert = function(index) {
-			alertService.closeAlert(index, 1);
+			alertService.alert.closeAlert(index, 1);
 		};
 
         self.findAllTipoUsuario = function () {
