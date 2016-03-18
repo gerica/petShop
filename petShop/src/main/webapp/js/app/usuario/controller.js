@@ -1,5 +1,5 @@
 appAutenticacao.controller("usuarioController", [
-    '$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
+    '$scope', '$log', 'petShopHttpFacade', 'alertService', function ($scope, $log, petShopHttpFacade, alertService) {
         $log.info("Iniciando usuarioController");
         var self = this;
         self.usuario;
@@ -13,16 +13,13 @@ appAutenticacao.controller("usuarioController", [
             "lista": "pages/usuario/lista.html",
         };
 
-        self.alerts = [];
-        self.addAlert = function (type, msg) {
-            self.alerts.push({
-                msg: msg,
-                type: type
-            });
-        };
-        self.closeAlert = function (index) {
-            self.alerts.splice(index, 1);
-        };
+		self.addAlert = function(type, msg) {
+			alertService.alert.addAlert(type, msg);
+		};
+		
+		self.closeAlert = function(index) {
+			alertService.closeAlert(index, 1);
+		};
 
         self.findAllTipoUsuario = function () {
             $log.info("tamplateSiteController.findAllTipoUsuario()");
