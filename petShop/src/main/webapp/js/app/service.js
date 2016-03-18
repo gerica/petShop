@@ -90,19 +90,22 @@ appAutenticacao.factory("petShopHttpFacade", function ($http) {
 
 appAutenticacao.factory('alertService', function(){
 	var _alert = function() {
-		var self = this;
-		self.items = [];
-		self.addAlert = function (type, msg) {
-			self.items.push({
+		var _items = [];
+		_addAlert = function (type, msg) {			
+			_items.push({
 				msg: msg,
 				type: type
 			});
 		};
-		self.closeAlert = function(index) {
-			self.items.splice(index, 1);
+		_closeAlert = function(index) {
+			_items.splice(index, 1);
+		};		
+		return {
+			addAlert: _addAlert,
+			closeAlert: _closeAlert
 		};
-	};
+	}();
 	return {
-		alert: _alert
-	}
+		alert: _alert		
+	};
 });

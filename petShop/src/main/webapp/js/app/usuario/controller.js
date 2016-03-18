@@ -12,7 +12,9 @@ appAutenticacao.controller("usuarioController", [
             "cadastro": "pages/usuario/cadastro.html",
             "lista": "pages/usuario/lista.html",
         };
-
+        
+        $log.info('alertService');
+        $log.info(alertService);
 		self.addAlert = function(type, msg) {
 			alertService.alert.addAlert(type, msg);
 		};
