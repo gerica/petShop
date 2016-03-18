@@ -3,23 +3,20 @@ appAutenticacao.controller("clienteController", [
 		'$uibModal',
 		'$log',
 		'petShopHttpFacade',
-		function($scope, $uibModal, $log, petShopHttpFacade) {
+		'alertService',
+		function($scope, $uibModal, $log, petShopHttpFacade, alertService) {
 			var self = this;
 			self.cliente;
 
 			// FUNCTIONALIDADE DE CADASTRO
 			$log.info("Iniciando clienteController");
-
-			self.alerts = [];
+			
 			self.addAlert = function(type, msg) {
-				self.alerts.push({
-					msg : msg,
-					type : type
-				});
+				alertService.alert.addAlert(type, msg);
 			};
 			
 			self.closeAlert = function(index) {
-				self.alerts.splice(index, 1);
+				alertService.closeAlert(index, 1);
 			};
 
 			self.salvar = function() {
