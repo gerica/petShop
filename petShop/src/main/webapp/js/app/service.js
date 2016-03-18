@@ -86,3 +86,23 @@ appAutenticacao.factory("petShopHttpFacade", function ($http) {
         incluirUsuario: _incluirUsuario,
     };
 });
+
+
+appAutenticacao.factory('alertService', function(){
+	var _alert = function() {
+		var self = this;
+		self.items = [];
+		self.addAlert = function (type, msg) {
+			self.items.push({
+				msg: msg,
+				type: type
+			});
+		};
+		self.closeAlert = function(index) {
+			self.items.splice(index, 1);
+		};
+	};
+	return {
+		alert: _alert
+	}
+});
