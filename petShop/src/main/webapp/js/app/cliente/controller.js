@@ -16,7 +16,7 @@ appAutenticacao.controller("clienteController", [
 			};
 			
 			self.closeAlert = function(index) {
-				alertService.closeAlert(index, 1);
+				alertService.alert.closeAlert(index, 1);
 			};
 
 			self.salvar = function() {
