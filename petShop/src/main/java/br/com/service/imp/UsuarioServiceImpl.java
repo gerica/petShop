@@ -22,4 +22,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioRepository.save(usuario);
 	}
 
+
+	public static void main(String[] args) {
+		
+		StringBuilder userSenhaView = new StringBuilder("rogerio");
+		userSenhaView.append(":");
+		userSenhaView.append("123");
+
+		System.out.println(new String(Base64.encode(userSenhaView.toString().getBytes())));
+		
+
+	}
+
 }
