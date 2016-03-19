@@ -1,5 +1,5 @@
 // File: chapter6/public/logging-interceptor.js
-appAutenticacao.factory('MyLoggingInterceptor', [
+petShoepApp.factory('MyLoggingInterceptor', [
 		'$q', '$log', function($q, $log) {
 			return {
 				request : function(config) {

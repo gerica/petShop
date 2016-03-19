@@ -1,0 +1,2 @@
+petShoepApp.controller("dashboardController", function() {
+});

@@ -1,4 +1,4 @@
-appAutenticacao.controller("vetConsultaController", function ($uibModal, $log, petShopHttpFacade) {
+petShoepApp.controller("vetConsultaController", function ($uibModal, $log, petShopHttpFacade) {
     $log.info("Iniciando vetConsultaController");
     var self = this;
     self.pet;

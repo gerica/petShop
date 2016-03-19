@@ -1,32 +1,4 @@
-appAutenticacao.controller("indexController", [
-    '$log', '$http', function ($log, $http) {
-        $log.info("Iniciando indexController");
-        var self = this;
-        self.usuario = {};
-
-        self.selectedTemplate = {
-            "path": "pages/login.html"
-        };
-
-        self.containsPapel = function (papel) {
-            //$log.info("contains papel: " + papel);
-            if (self.usuario.tipoUsuario.tipoUsuarioPapels) {
-                for (i = 0; i < self.usuario.tipoUsuario.tipoUsuarioPapels.length; i++) {
-                    if (self.usuario.tipoUsuario.tipoUsuarioPapels[i].papel.dsPapel == papel) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        };
-
-//			self.addUserHeader = function() {
-//				$http.defaults.headers.common.Authorization = 'Basic ' + self.usuario.dsSenha;
-//			}
-    }
-]);
-
-appAutenticacao.controller("loginController", [
+petShoepApp.controller("loginController", [
     '$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
         $log.info("Iniciando loginController");
         var self = this;
@@ -43,7 +15,7 @@ appAutenticacao.controller("loginController", [
                     $log.info("Login com sucesso.");
 
                     $scope.indexCtrl.selectedTemplate = {
-                        "path": "pages/tamplateSite.html"
+                        "path": "dashboard/tamplateSite.html"
                     }
                     $scope.indexCtrl.usuario = data;
 //						$scope.indexCtrl.addUserHeader();
@@ -88,29 +60,5 @@ appAutenticacao.controller("loginController", [
 
         }
 
-    }
-]);
-
-appAutenticacao.controller("dashboardController", function ($scope, $log) {
-    $log.info("Iniciando dashboardController");
-    $scope.petCaoForm = function () {
-        $log.info('petCaoForm');
-    }
-});
-
-appAutenticacao.controller("tamplateSiteController", [
-    '$scope', '$log', function ($scope, $log) {
-        $log.info("Iniciando tamplateSiteController");
-        var self = this;
-        self.selectedTemplate = {
-            "path": "pages/dashboard.html"
-        };
-
-        self.logout = function () {
-            $log.info("logout");
-            $scope.indexCtrl.selectedTemplate = {
-                "path": "pages/login.html"
-            }
-        }
     }
 ]);

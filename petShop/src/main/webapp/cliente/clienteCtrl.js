@@ -1,4 +1,4 @@
-appAutenticacao.controller("clienteController", [
+petShoepApp.controller("clienteController", [
 		'$scope',
 		'$uibModal',
 		'$log',
@@ -10,7 +10,7 @@ appAutenticacao.controller("clienteController", [
 			// FUNCTIONALIDADE DE CADASTRO
 			$log.info("Iniciando clienteController");
 
-			self.myAlert = new MyAlert();			
+			self.myAlert = new MyAlert();
 
 			self.salvar = function() {
 				self.myAlert.removeMessage(0);
@@ -36,10 +36,10 @@ appAutenticacao.controller("clienteController", [
 					self.formCliente.email.$setDirty(true);
 				}
 			};
-			
+
 			self.limparForm = function(cliente) {
 				for ( var key in cliente) {
-//					delete self.cliente[key];
+					// delete self.cliente[key];
 					self.cliente = null;
 				}
 			};
@@ -48,7 +48,7 @@ appAutenticacao.controller("clienteController", [
 			$log.info("Iniciando listaClienteController");
 			self.search;
 			self.itemsPerPage = 10;
-			self.currentPage = 1;			
+			self.currentPage = 1;
 			self.activeTabs = [
 					true, false
 			];
@@ -90,13 +90,13 @@ appAutenticacao.controller("clienteController", [
 					console.log(data, status);
 				});
 			}
-			
+
 			// funcionalidade de modal
 			self.open = function(size, cliente) {
 
 				var modalInstance = $uibModal.open({
 					animation : self.animationsEnabled,
-					templateUrl : '/petShop/pages/cliente/modalDetalhe.html',
+					templateUrl : '/petShop/cliente/modalDetalhe.html',
 					controller : 'modalDetalheClienteController as ctrl',
 					size : size,
 					resolve : {
@@ -120,14 +120,13 @@ appAutenticacao.controller("clienteController", [
 
 			// FUNCIONALIDADES DE PETS
 			self.pages = {
-				"pets": "pages/cliente/pets.html",
+				"pets" : "cliente/pets.html",
 			};
 
-			self.findPetByCliente = function(){
+			self.findPetByCliente = function() {
 				$log.info("clienteController.findPetByCliente()");
 				petShopHttpFacade.findPetByCliente(self.cliente).success(function(data, status, headers, config) {
 					self.pets = data;
-					console.log(self.pets);
 				}).error(function(data, status, headers, config) {
 					console.log("erro-----------------");
 					console.log(data, status);
@@ -138,7 +137,7 @@ appAutenticacao.controller("clienteController", [
 		}
 ]);
 
-appAutenticacao.controller('modalDetalheClienteController', function($uibModalInstance, $log, cliente) {
+petShoepApp.controller('modalDetalheClienteController', function($uibModalInstance, $log, cliente) {
 	var self = this;
 	self.cliente = cliente;
 

@@ -1,4 +1,4 @@
-appAutenticacao.run(function($rootScope, $log, $http) {
+petShoepApp.run(function($rootScope, $log, $http) {
 	$log.info("Run app");
 	$http.defaults.headers.common.Accept = "application/json";
 	$http.defaults.cache = true;

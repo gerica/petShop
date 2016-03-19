@@ -1,4 +1,4 @@
-appAutenticacao.directive('notification', [
+petShoepApp.directive('notification', [
 		'$timeout', function($timeout) {
 			return {
 				restrict : 'A',
@@ -33,7 +33,7 @@ appAutenticacao.directive('notification', [
 		}
 ]);
 
-appAutenticacao.directive('alertaMensagem', function() {
+petShoepApp.directive('alertaMensagem', function() {
 	return {
 		restrict : 'EACM',
 		replace : true,
@@ -52,7 +52,7 @@ appAutenticacao.directive('alertaMensagem', function() {
 
 	}
 });
-appAutenticacao.directive('navigation', function() {
+petShoepApp.directive('navigation', function() {
 	return {
 		restrict : 'EACM',
 		templateUrl : 'petShop/pages/navigation.html',
@@ -61,7 +61,7 @@ appAutenticacao.directive('navigation', function() {
 	}
 });
 
-appAutenticacao.directive('autoComplete', function(autoCompleteDataService) {
+petShoepApp.directive('autoComplete', function(autoCompleteDataService) {
 	return {
 		restrict : 'A',
 		link : function(scope, elem, attr, ctrl) {
@@ -79,7 +79,7 @@ appAutenticacao.directive('autoComplete', function(autoCompleteDataService) {
 
 // Common directive for Focus
 
-appAutenticacao.directive('focus', function($timeout) {
+petShoepApp.directive('focus', function($timeout) {
 	return {
 		scope : {
 			trigger : '@focus'
@@ -97,7 +97,7 @@ appAutenticacao.directive('focus', function($timeout) {
 });
 
 
-appAutenticacao.directive('myAlert', function(){
+petShoepApp.directive('myAlert', function(){
 	return {
 		restrict: 'E',
 		scope: {

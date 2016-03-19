@@ -1,4 +1,4 @@
-appAutenticacao.controller("usuarioController", [
+petShoepApp.controller("usuarioController", [
     '$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
         $log.info("Iniciando usuarioController");
         var self = this;
@@ -9,8 +9,8 @@ appAutenticacao.controller("usuarioController", [
         ];
 
         self.pages = {
-            "cadastro": "pages/usuario/cadastro.html",
-            "lista": "pages/usuario/lista.html",
+            "cadastro": "usuario/cadastro.html",
+            "lista": "usuario/lista.html",
         };
         
         self.myAlert = new MyAlert();

@@ -5,7 +5,7 @@
 	<display-name>petShop</display-name>
 
 	<welcome-file-list>
-		<welcome-file>pages/index.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 	<context-param>

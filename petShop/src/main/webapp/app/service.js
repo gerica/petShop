@@ -1,4 +1,4 @@
-appAutenticacao.factory("petShopHttpFacade", function ($http) {
+petShoepApp.factory("petShopHttpFacade", function ($http) {
     var _login = function (userLogin) {
         // $http.defaults.headers.common.Authorization = userLogin.dsLogin + '@'
         // + userLogin.dsSenha;

@@ -1,0 +1,85 @@
+<!doctype html>
+<html ng-app="petShoepApp">
+<head>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="P�gina inicial da aplica��o">
+<meta name="author" content="Rog�rio Cardoso">
+
+<link href="lib/css/stilo.css" rel="stylesheet">
+
+<!-- Bootstrap Core CSS -->
+<link href="lib/css/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="lib/css/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="lib/css/dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="lib/css/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- Timeline CSS -->
+<link href="lib/css/dist/css/timeline.css" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="lib/js/bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="lib/js/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+<!-- Angular -->
+<script src="lib/js/bower_components/angular/angular.min.js"></script>
+
+<!-- Angular animate -->
+<script src="lib/js/bower_components/angular-animate/angular-animate.min.js"></script>
+
+<!-- Angular aria -->
+<script src="lib/js/bower_components/angular-aria/angular-aria.js"></script>
+
+<!-- Angular route -->
+<!-- <script src="lib/js/bower_components/angular-route/angular-route.min.js"></script> -->
+
+<!-- Angular ui-route -->
+<script src="lib/js/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<!-- Angular ui -->
+<!-- <script src="js/bower_components/angular-ui/build/angular-ui.min.js"></script> -->
+
+<!-- ui-bootstrap-tpls -->
+<script src="lib/js/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="lib/js/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="lib/js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Application Scritps -->
+<script src="lib/js/app/class/myAlertClass.js"></script>
+<script src="app/app.js"></script>
+<script src="app/logging-interceptor.js"></script>
+<script src="app/config.js"></script>
+<script src="app/run.js"></script>
+<script src="app/module.js"></script>
+<script src="app/directives.js"></script>
+<script src="app/service.js"></script>
+<script src="indexCtrl.js"></script>
+<script src="login/loginCtrl.js"></script>
+<script src="dashboard/dashboardCtrl.js"></script>
+<script src="dashboard/tamplateSiteCtrl.js"></script>
+<script src="cliente/clienteCtrl.js"></script>
+<script src="usuario/usuarioCtrl.js"></script>
+<script src="pet/petCtrl.js"></script>
+<script src="veterinaria/consulta/vetConsultaCtrl.js"></script>
+<!-- <script src=""></script> -->
+
+<title>Pet Shop</title>
+</head>
+<body ng-controller="indexController as indexCtrl">
+<!-- 	<div ng-include src="'pages/tamplateSite.html'"></div> -->
+	<div ng-include="indexCtrl.selectedTemplate.path"></div>
+</body>
+
+</html>
