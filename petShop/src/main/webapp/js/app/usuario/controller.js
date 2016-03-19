@@ -1,5 +1,5 @@
 appAutenticacao.controller("usuarioController", [
-    '$scope', '$log', 'petShopHttpFacade', 'alertService', function ($scope, $log, petShopHttpFacade, alertService) {
+    '$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
         $log.info("Iniciando usuarioController");
         var self = this;
         self.usuario;
@@ -13,15 +13,7 @@ appAutenticacao.controller("usuarioController", [
             "lista": "pages/usuario/lista.html",
         };
         
-        $log.info('alertService');
-        $log.info(alertService);
-		self.addAlert = function(type, msg) {
-			alertService.alert.addAlert(type, msg);
-		};
-		
-		self.closeAlert = function(index) {
-			alertService.alert.closeAlert(index, 1);
-		};
+        self.myAlert = new MyAlert();
 
         self.findAllTipoUsuario = function () {
             $log.info("tamplateSiteController.findAllTipoUsuario()");
@@ -34,12 +26,12 @@ appAutenticacao.controller("usuarioController", [
         self.findAllTipoUsuario();
 
         self.salvar = function () {
-            self.closeAlert(0);
+        	self.myAlert.removeMessage(0);
             if (self.formUser.$valid) {
 
                 petShopHttpFacade.incluirUsuario(self.usuario).success(function (data, status, headers, config) {
                     $log.info("Usuario inserido.");
-                    self.addAlert("success", "Registro cadastrado com sucesso.");
+                    self.myAlert.addMessage("success", "Registro cadastrado com sucesso.");
                     self.formUser.$setPristine();
                     self.limparForm(self.usuario);
                 }).error(function (data, status, headers, config) {
@@ -47,7 +39,7 @@ appAutenticacao.controller("usuarioController", [
                     console.log(data, status);
                 });
             } else {
-                self.addAlert("", "Informe os campos.");
+                self.myAlert.addMessage("", "Informe os campos.");
 
                 self.formUser.nomeUsuario.$setDirty(true);
                 self.formUser.emailUsuario.$setDirty(true);

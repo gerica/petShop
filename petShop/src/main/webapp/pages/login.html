@@ -7,7 +7,7 @@
 				</div>
 				<div class="panel-body">
 					<form role="form" name="loginCtrl.formLogin" ng-submit="loginCtrl.logar()">
-						<uib-alert ng-repeat="alert in loginCtrl.alerts" type="{{alert.type}}" close="loginCtrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+						<my-alert obj="loginCtrl.myAlert"></my-alert>
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="Login" name="login" type="text" ng-model="loginCtrl.usuario.dsLogin" autofocus required>

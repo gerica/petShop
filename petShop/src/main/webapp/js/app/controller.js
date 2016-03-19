@@ -31,23 +31,12 @@ appAutenticacao.controller("loginController", [
         $log.info("Iniciando loginController");
         var self = this;
         self.usuario;
-
-        // funcionalidade de alerta
-        self.alerts = [];
-        self.addAlert = function (type, msg) {
-            self.alerts.push({
-                msg: msg,
-                type: type
-            });
-        };
-        self.closeAlert = function (index) {
-            self.alerts.splice(index, 1);
-        };
-        // fim - funcionalidade de alerta
+        
+        self.myAlert = new MyAlert();        
 
         // Binding the park function to the scope
         self.logar = function () {
-            self.closeAlert(0);
+        	self.myAlert.removeMessage(0);
 
             if (self.formLogin.$valid) {
                 petShopHttpFacade.login(self.usuario).success(function (data, status, headers, config) {
@@ -63,13 +52,13 @@ appAutenticacao.controller("loginController", [
                     switch (status) {
                         case 400:
                         {
-                            self.addAlert("", data.description);
+                        	self.myAlert.addMessage("", data.description);
                             break;
                         }
                     }
                 });
             } else {
-                self.addAlert("", "Informe o email é a senha.");
+            	self.myAlert.addMessage("", "Informe o email é a senha.");
 
                 self.formLogin.login.$setDirty(true);
                 self.formLogin.senha.$setDirty(true);

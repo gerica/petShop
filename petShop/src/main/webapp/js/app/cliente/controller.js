@@ -3,29 +3,22 @@ appAutenticacao.controller("clienteController", [
 		'$uibModal',
 		'$log',
 		'petShopHttpFacade',
-		'alertService',
-		function($scope, $uibModal, $log, petShopHttpFacade, alertService) {
+		function($scope, $uibModal, $log, petShopHttpFacade) {
 			var self = this;
 			self.cliente;
 
 			// FUNCTIONALIDADE DE CADASTRO
 			$log.info("Iniciando clienteController");
-			
-			self.addAlert = function(type, msg) {
-				alertService.alert.addAlert(type, msg);
-			};
-			
-			self.closeAlert = function(index) {
-				alertService.alert.closeAlert(index, 1);
-			};
+
+			self.myAlert = new MyAlert();			
 
 			self.salvar = function() {
-				self.closeAlert(0);
+				self.myAlert.removeMessage(0);
 				if (self.formCliente.$valid) {
 					self.cliente.usuario = $scope.indexCtrl.usuario;
 					petShopHttpFacade.incluirCliente(self.cliente).success(function(data, status, headers, config) {
 						$log.info("Cliente inserido.");
-						self.addAlert("success", "Registro cadastrado com sucesso.");
+						self.myAlert.addMessage("success", "Registro cadastrado com sucesso.");
 						self.formCliente.$setPristine();
 						self.limparForm(self.cliente);
 
@@ -35,7 +28,7 @@ appAutenticacao.controller("clienteController", [
 						console.log(data, status);
 					});
 				} else {
-					self.addAlert("", "Informe os campos.");
+					self.myAlert.addMessage("", "Informe os campos.");
 
 					self.formCliente.nome.$setDirty(true);
 					self.formCliente.sobreNome.$setDirty(true);

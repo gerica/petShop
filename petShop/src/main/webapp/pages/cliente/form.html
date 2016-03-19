@@ -9,7 +9,7 @@
 	<div class="tab-content">
 		<uib-tabset> <uib-tab index="0" heading="Cadastro" active="ctrl.activeTabs[0]">
 		<form role="form" name="ctrl.formCliente" novalidate ng-submit="ctrl.salvar()">
-			<uib-alert ng-repeat="alert in ctrl.alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+			<my-alert obj="ctrl.myAlert"></my-alert>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">

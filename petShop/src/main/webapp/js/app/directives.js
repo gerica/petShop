@@ -95,3 +95,18 @@ appAutenticacao.directive('focus', function($timeout) {
 		}
 	};
 });
+
+
+appAutenticacao.directive('myAlert', function(){
+	return {
+		restrict: 'E',
+		scope: {
+			obj: '='
+		},		
+		template: '<uib-alert ng-repeat="msg in obj.getMessages()" type="{{msg.type}}" close="obj.removeMessage($index)">' +
+        			'{{msg.text}}' + 
+        		  '</uib-alert>',
+		transclude: true,
+		replace: false
+	};
+});
