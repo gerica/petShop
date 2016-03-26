@@ -1,36 +1,36 @@
 petShoepApp.controller("loginController", [
-    '$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
+    '$scope', '$log', 'AuthenticationService', function ($scope, $log, AuthenticationService) {
         $log.info("Iniciando loginController");
         var self = this;
         self.usuario;
-        
-        self.myAlert = new MyAlert();        
+
+        self.myAlert = new MyAlert();
 
         // Binding the park function to the scope
         self.logar = function () {
-        	self.myAlert.removeMessage(0);
+            self.myAlert.removeMessage(0);
 
             if (self.formLogin.$valid) {
-                petShopHttpFacade.login(self.usuario).success(function (data, status, headers, config) {
+                AuthenticationService.login(self.usuario).success(function (data, status, headers, config) {
                     $log.info("Login com sucesso.");
+                    $scope.indexCtrl.usuario =data;
 
                     $scope.indexCtrl.selectedTemplate = {
                         "path": "dashboard/tamplateSite.html"
                     }
-                    $scope.indexCtrl.usuario = data;
-//						$scope.indexCtrl.addUserHeader();
+                    //AuthenticationService.setCredentials(data);
 
                 }).error(function (data, status, headers, config) {
                     switch (status) {
                         case 400:
                         {
-                        	self.myAlert.addMessage("", data.description);
+                            self.myAlert.addMessage("", data.description);
                             break;
                         }
                     }
                 });
             } else {
-            	self.myAlert.addMessage("", "Informe o email é a senha.");
+                self.myAlert.addMessage("", "Informe o email é a senha.");
 
                 self.formLogin.login.$setDirty(true);
                 self.formLogin.senha.$setDirty(true);

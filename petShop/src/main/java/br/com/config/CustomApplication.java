@@ -11,6 +11,6 @@ public class CustomApplication extends ResourceConfig {
 		register(LoggingFilter.class);
 
 		// Register Auth Filter here
-		register(AuthenticationFilter.class);
+//		register(AuthenticationFilter.class);
 	}
 }

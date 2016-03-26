@@ -33,7 +33,7 @@ public class ClienteRest {
 	@POST
 	@Path(PATH_CLIENTE_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
 	public Response incluir(Cliente cliente) {
 		clienteService.incluir(cliente);
 		return Response.status(200).build();
@@ -42,7 +42,7 @@ public class ClienteRest {
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
 	public List<Cliente> findAllCliente() {
 		return clienteService.findAll();
 	}
@@ -50,7 +50,7 @@ public class ClienteRest {
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_VALOR)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
 	public List<Cliente> findCliente(@QueryParam("valor") String valor) {
 		return clienteService.findByValor(valor);
 	}

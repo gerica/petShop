@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
 encoding//src/main/java/br/com/service/imp/LoginServiceImp.java=UTF-8
+encoding//src/main/resources=UTF-8
 encoding//src/main/resources/carga_banco.sql=UTF-8
 encoding//src/main/resources/create_data_base.sql=UTF-8
 encoding//src/main/webapp/cliente/form.html=UTF-8
@@ -13,3 +15,4 @@ encoding//src/main/webapp/shop/racao.html=UTF-8
 encoding//src/main/webapp/usuario/cadastro.html=UTF-8
 encoding//src/main/webapp/usuario/form.html=UTF-8
 encoding//src/main/webapp/veterinaria/consulta/form.html=UTF-8
+encoding/<project>=UTF-8
