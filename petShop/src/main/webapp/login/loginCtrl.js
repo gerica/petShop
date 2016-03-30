@@ -62,3 +62,23 @@ petShoepApp.controller("loginController", [
 
     }
 ]);
+
+
+petShoepApp.controller("testeController", ['$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
+	var self = this;
+	self.title = 'Cliente';
+	self.tabs = {
+        cadastro: {
+        	active: false,
+        	page: "usuario/cadastro.html",
+        },
+        lista: {
+        	active: true,
+        	page: "usuario/lista.html"
+        }
+    };	
+	
+	self.findAll = function() {
+		alert('FINDING ALL ENTITIES');
+	};
+}]);
