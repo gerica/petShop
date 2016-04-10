@@ -5,6 +5,6 @@ import br.com.excecao.PetShopBusinessExcption;
 
 public interface LoginService {
 
-	Usuario logar(Usuario usuario) throws PetShopBusinessExcption;
+	Usuario logar(String username, String password) throws PetShopBusinessExcption;
 
 }

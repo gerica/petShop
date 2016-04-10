@@ -19,7 +19,6 @@ petShoepApp.controller("loginController", [
 				if (self.formLogin.$valid) {
 					AuthenticationService.login(self.usuario).success(function(data, status, headers, config) {
 						$log.info("Login com sucesso.");
-						$scope.indexCtrl.usuario = data;
 
 						AuthenticationService.setCredentials(data);
 						// AuthenticationService.setLoggedIn(true);

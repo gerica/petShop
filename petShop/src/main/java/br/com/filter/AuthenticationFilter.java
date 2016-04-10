@@ -11,6 +11,7 @@ import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
@@ -19,6 +20,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import org.glassfish.jersey.internal.util.Base64;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+import br.com.entidade.permissao.TipoUsuarioPapel;
+import br.com.entidade.permissao.Usuario;
 
 /**
  * This filter verify the access permissions for a user based on username and
@@ -92,24 +97,29 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
 	}
 
 	private boolean isUserAllowed(final String username, final String password, final Set<String> rolesSet) {
-		boolean isAllowed = false;
+		HttpSession session = req.getSession();
+		UsernamePasswordAuthenticationToken usuarioToken = (UsernamePasswordAuthenticationToken) session.getAttribute("jsessionid");
+		if (usuarioToken != null) {
+			Usuario usuario = (Usuario) usuarioToken.getPrincipal();
 
-		// Step 1. Fetch password from database and match with password in
-		// argument
-		// If both match then get the defined role for user from database and
-		// continue; else return isAllowed [false]
-		// Access the database and do this part yourself
-		// String userRole = userMgr.getUserRole(username);
+			if (username.equals(usuario.getDsNome()) && password.equals(usuario.getDsSenha())) {
 
-		if (username.equals("rogerio") && password.equals("123")) {
-			String userRole = "ADMIN";
+				if (usuario != null) {
+					for (String role : rolesSet) {
+						if (usuario.getTipoUsuario().getTipoUsuarioPapels() != null) {
+							for (TipoUsuarioPapel tipoUsuarioPapel : usuario.getTipoUsuario().getTipoUsuarioPapels()) {
+								if (tipoUsuarioPapel.getPapel().getDsPapel().equals(role)) {
+									return true;
 
-			// Step 2. Verify user role
-			if (rolesSet.contains(userRole)) {
-				isAllowed = true;
+								}
+							}
+						}
+
+					}
+				}
 			}
 		}
-		return isAllowed;
+		return false;
 	}
 
 	public static void main(String[] args) {

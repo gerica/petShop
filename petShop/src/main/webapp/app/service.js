@@ -122,7 +122,7 @@ petShoepApp.factory('AuthenticationService', [
 			 * _urlLogin(usuario); }, 1000); };
 			 */
 			var _setCredentials = function(usuario) {
-				var authdata = Base64.encode(usuario.dsNome + ':' + usuario.dsSenha);
+				var authdata = Base64.encode(usuario.dsLogin + ':' + usuario.dsSenha);
 
 				$rootScope.globals = {
 					currentUser : {

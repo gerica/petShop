@@ -10,4 +10,6 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, I
 	@Query(value = "SELECT u FROM Usuario u WHERE UPPER(u.dsLogin) like UPPER(?1)")
 	Usuario findUsuarioByDsLogin(String dsLogin);
 
+	Usuario findByDsNome(String username);
+
 }

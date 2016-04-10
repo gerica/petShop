@@ -16,10 +16,15 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 
+import br.com.config.CustomAuthenticationProvider;
 import br.com.entidade.permissao.Usuario;
-import br.com.excecao.PetShopBusinessExcption;
 import br.com.excecao.PetShopExceptionWebApplication;
 import br.com.service.LoginService;
 
@@ -37,8 +42,12 @@ public class LoginRest {
 	@Autowired
 	private LoginService loginService;
 
+	@Autowired
+	private CustomAuthenticationProvider authenticatin;
+	
 	@Context
 	private HttpServletRequest httpServletRequest;
+	
 
 	@POST
 	@Path(PATH_LOGIN_REST_LOGAR)
@@ -47,17 +56,23 @@ public class LoginRest {
 	@PermitAll
 	public Response login(Usuario usuario) {
 		logger.info("LoginRest.login()");
-		Usuario usuarioLogin = null;
+		
+		
 		try {
-			usuarioLogin = loginService.logar(usuario);
-		} catch (PetShopBusinessExcption e) {
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(usuario.getDsLogin(), usuario.getDsSenha());
+			token.setDetails(new WebAuthenticationDetails(httpServletRequest));
+			Authentication auth = authenticatin.authenticate(token);
+			SecurityContextHolder.getContext().setAuthentication(auth);
+			
+			// We configure your Security Context here
+			httpServletRequest.getSession().setAttribute("jsessionid", auth);
+			return Response.ok().entity(auth.getPrincipal()).build();
+		} catch (AuthenticationException e) {
 			logger.error(e.getMessage());
 			throw new PetShopExceptionWebApplication(e.getMessage());
 		}
+		
 
-		// We configure your Security Context here
-		httpServletRequest.getSession().setAttribute("jsessionid", usuarioLogin);
-		return Response.ok().entity(usuarioLogin).build();
 	}
 
 	@POST
@@ -79,7 +94,7 @@ public class LoginRest {
 	public Response sessionAtivada() {
 		logger.info("LoginRest.sessionAtivada()");
 		HttpSession session = httpServletRequest.getSession();
-		Usuario usuario = (Usuario) session.getAttribute("jsessionid");
+		UsernamePasswordAuthenticationToken usuario = (UsernamePasswordAuthenticationToken) session.getAttribute("jsessionid");
 		
 		if (usuario == null) {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
