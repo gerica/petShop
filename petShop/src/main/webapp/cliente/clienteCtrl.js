@@ -1,9 +1,9 @@
 petShoepApp.controller("clienteController", [
-    '$scope',
+    '$rootScope',
     '$uibModal',
     '$log',
     'petShopHttpFacade',
-    function ($scope, $uibModal, $log, petShopHttpFacade) {
+    function ($rootScope, $uibModal, $log, petShopHttpFacade) {
         var self = this;
         self.cliente;
 
@@ -12,10 +12,12 @@ petShoepApp.controller("clienteController", [
 
         self.myAlert = new MyAlert();
 
+        $log.info($rootScope.globals.currentUser);
         self.salvar = function () {
             self.myAlert.removeMessage(0);
             if (self.formCliente.$valid) {
-                self.cliente.usuario = $scope.indexCtrl.usuario;
+                self.cliente.usuario = $rootScope.globals.currentUser.user;
+                //self.cliente.usuario = $scope.indexCtrl.usuario;
                 //self.cliente.usuario = sessionService.getUsuario();
                 petShopHttpFacade.incluirCliente(self.cliente).success(function (data, status, headers, config) {
                     $log.info("Cliente inserido.");

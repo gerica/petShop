@@ -1,19 +1,20 @@
 petShoepApp.controller("tamplateSiteController", [
-    '$scope', '$log', 'petShopHttpFacade', function ($scope, $log, petShopHttpFacade) {
+    '$scope', '$log', '$state', 'AuthenticationService', function ($scope, $log, $state, AuthenticationService) {
         $log.info("Iniciando tamplateSiteController");
         var self = this;
-        self.selectedTemplate = {
-            "path": "dashboard/dashboard.html"
-        };
+
+        self.isAuthenticate = function(){
+            return AuthenticationService.isLoggedIn();
+        }
 
         self.logout = function () {
             $log.info("logout");
-            petShopHttpFacade.logout().success(function (data, status, headers, config) {
+            AuthenticationService.logout().success(function (data, status, headers, config) {
+                AuthenticationService.isLoggedIn();
                 $log.info("Logout com sucesso.");
+                AuthenticationService.setLoggedIn(false);
+                $state.go('login');
 
-                $scope.indexCtrl.selectedTemplate = {
-                    "path": "login/login.html"
-                }
             }).error(function (data, status, headers, config) {
                 console.log("erro-----------------");
                 console.log(data, status);

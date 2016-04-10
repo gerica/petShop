@@ -5,6 +5,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -72,17 +73,17 @@ public class LoginRest {
 		return Response.ok().build();
 	}
 
-	@POST
-	@Path(PATH_SESSION_ATIVADA)
-	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	@Path(PATH_SESSION_ATIVADA)	
 	@PermitAll
 	public Response sessionAtivada() {
 		logger.info("LoginRest.sessionAtivada()");
 		HttpSession session = httpServletRequest.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("jsessionid");
-
+		
 		if (usuario == null) {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
+			
 		}
 
 

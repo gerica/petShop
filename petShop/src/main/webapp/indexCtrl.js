@@ -2,18 +2,6 @@ petShoepApp.controller("indexController", [
     '$log', '$http', function ($log, $http) {
         $log.info("Iniciando indexController");
         var self = this;
-        self.usuario = null;
-        self.selectedTemplate = {
-            "path": ""
-        };
-        if (self.usuario) {
-            // Está logado
-            self.selectedTemplate.path = "dashboard/tamplateSite.html";
-        } else {
-            // Não está logado
-            self.selectedTemplate.path = "login/login.html";
-        }
-
 
         self.containsPapel = function (papel) {
             // $log.info("contains papel: " + papel);

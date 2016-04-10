@@ -7,8 +7,8 @@ import br.com.filter.AuthenticationFilter;
 
 public class CustomApplication extends ResourceConfig {
 	public CustomApplication() {
-		packages("br.com.rest");
-		register(LoggingFilter.class);
+//		packages("br.com.rest");
+//		register(LoggingFilter.class);
 
 		// Register Auth Filter here
 //		register(AuthenticationFilter.class);

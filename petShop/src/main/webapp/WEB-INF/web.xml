@@ -19,8 +19,8 @@
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
 			<param-value>br.com.rest</param-value>
-			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>br.com.config.CustomApplication</param-value>
+<!-- 			<param-name>javax.ws.rs.Application</param-name> -->
+<!-- 			<param-value>br.com.config.CustomApplication</param-value> -->
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
