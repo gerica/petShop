@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.entidade.permissao.PapelEnum;
 import br.com.entidade.sistema.Cliente;
 import br.com.service.ClienteService;
 
@@ -32,15 +33,12 @@ public class ClienteRest {
 
 	@Autowired
 	private ClienteService clienteService;
-	
-	@Context
-	private HttpServletRequest httpServletRequest;
-
 
 	@POST
 	@Path(PATH_CLIENTE_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public Response incluir(Cliente cliente) {
 		clienteService.incluir(cliente);
 		return Response.status(200).build();
@@ -49,17 +47,17 @@ public class ClienteRest {
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Cliente> findAllCliente() {
-		HttpSession session = httpServletRequest.getSession();
-		session.invalidate();
 		return clienteService.findAll();
 	}
 
 	@GET
 	@Path(PATH_CLIENTE_REST_FIND_VALOR)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Cliente> findCliente(@QueryParam("valor") String valor) {
 		return clienteService.findByValor(valor);
 	}

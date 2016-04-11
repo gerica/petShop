@@ -2,21 +2,27 @@ package br.com.entidade.permissao;
 
 public enum PapelEnum {
 
-	GERENTE(1, "GERENTE"), //
-	VENDAS(2, "VENDAS"), //
-	COMPRAS(3, "COMPRAS"), //
-	VETERINARIO(4, "VETERINARIO"), //
-	CONTABIL(5, "CONTABIL"), //
-	FISCAL(6, "FISCAL"), //
-	TOSARDOR(7, "TOSARDOR"), //
-	ENCARREGADO_ESTOQUE(8, "ENCARREGADO ESTOQUE");
-
-	private Integer id;
-	private String descricao;
+	GERENTE(1, Constants.GERENTE), //
+	VENDAS(2, Constants.VENDAS), //
+	COMPRAS(3, Constants.COMPRAS), //
+	VETERINARIO(4, Constants.VETERINARIO), //
+	CONTABIL(5, Constants.CONTABIL), //
+	FISCAL(6, Constants.FISCAL), //
+	TOSARDOR(7, Constants.TOSARDOR), //
+	ENCARREGADO_ESTOQUE(8, Constants.ENCARREGADO_ESTOQUE);
 
 	private PapelEnum(Integer id, String descricao) {
-		this.id = id;
-		this.descricao = descricao;
+	}
+
+	public static class Constants {
+		public static final String GERENTE = "GERENTE";
+		public static final String VENDAS = "VENDAS";
+		public static final String COMPRAS = "COMPRAS";
+		public static final String VETERINARIO = "VETERINARIO";
+		public static final String CONTABIL = "CONTABIL";
+		public static final String FISCAL = "FISCAL";
+		public static final String TOSARDOR = "TOSARDOR";
+		public static final String ENCARREGADO_ESTOQUE = "ENCARREGADO_ESTOQUE";
 	}
 
 }

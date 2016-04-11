@@ -79,8 +79,8 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
 			final String password = tokenizer.nextToken();
 
 			// Verifying Username and password
-			System.out.println(username);
-			System.out.println(password);
+//			System.out.println(username);
+//			System.out.println(password);
 
 			// Verify user access
 			if (method.isAnnotationPresent(RolesAllowed.class)) {
@@ -102,7 +102,7 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
 		if (usuarioToken != null) {
 			Usuario usuario = (Usuario) usuarioToken.getPrincipal();
 
-			if (username.equals(usuario.getDsNome()) && password.equals(usuario.getDsSenha())) {
+			if (username.equals(usuario.getDsLogin()) && password.equals(usuario.getDsSenha())) {
 
 				if (usuario != null) {
 					for (String role : rolesSet) {

@@ -78,7 +78,7 @@ public class LoginRest {
 	@POST
 	@Path(PATH_LOGIN_REST_LOGOUT)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({ "GERENTE", "VENDAS", "COMPRAS", "VETERINARIO", "CONTABIL", "FISCAL", "TOSARDOR", "ENCARREGADO ESTOQUE" })
+	@PermitAll
 	public Response logout() {
 		logger.info("LoginRest.logout()");
 

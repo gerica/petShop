@@ -111,7 +111,7 @@ petShoepApp.factory('AuthenticationService', [
 					isLoggedIn = true;
 				}).error(function(data) {
 					isLoggedIn = false;
-                    Messages.addMessage("A sessão expirou!");
+					Messages.addMessage("A sessão expirou!");
 					$state.go('login');
 
 				});
@@ -142,6 +142,21 @@ petShoepApp.factory('AuthenticationService', [
 				$http.defaults.headers.common.Authorization = 'Basic ';
 			};
 
+			var _containsPapel = function(papel) {
+				if ($rootScope.globals != undefined) {
+
+					var usuario = $rootScope.globals.currentUser.user;
+					if (usuario && usuario.tipoUsuario.tipoUsuarioPapels) {
+						for (i = 0; i < usuario.tipoUsuario.tipoUsuarioPapels.length; i++) {
+							if (usuario.tipoUsuario.tipoUsuarioPapels[i].papel.dsPapel == papel) {
+								return true;
+							}
+						}
+					}
+				}
+				return false;
+			}
+
 			return {
 				login : _login,
 				logout : _logout,
@@ -149,7 +164,8 @@ petShoepApp.factory('AuthenticationService', [
 				clearCredentials : _clearCredentials,
 				isLoggedIn : _isLoggedIn,
 				setLoggedIn : _setLoggedIn,
-				sessionAtivada : _sessionAtivada
+				sessionAtivada : _sessionAtivada,
+				containsPapel : _containsPapel
 			};
 		}
 ]);

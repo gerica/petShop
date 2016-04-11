@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.entidade.permissao.PapelEnum;
 import br.com.entidade.permissao.Usuario;
 import br.com.service.UsuarioService;
 
@@ -26,7 +27,8 @@ public class UsuarioRest {
 	@POST
 	@Path(PATH_USUARIO_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+		PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public Response incluir(Usuario usuario) {
 		usuarioService.incluir(usuario);
 		return Response.status(200).build();

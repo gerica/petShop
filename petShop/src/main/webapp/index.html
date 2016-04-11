@@ -68,7 +68,7 @@
 <script src="indexCtrl.js"></script>
 <script src="login/loginCtrl.js"></script>
 <script src="dashboard/dashboardCtrl.js"></script>
-<script src="dashboard/tamplateSiteCtrl.js"></script>
+<!-- <script src="dashboard/tamplateSiteCtrl.js"></script> -->
 <script src="cliente/clienteCtrl.js"></script>
 <script src="usuario/usuarioCtrl.js"></script>
 <script src="pet/petCtrl.js"></script>
@@ -82,9 +82,9 @@
 <!-- Custom Theme JavaScript -->
 <script src="/petShop/lib/js/dist/js/sb-admin-2.js"></script>
 
-<div id="wrapper" ng-controller="tamplateSiteController as tamplateSiteCtrl">
+<div id="wrapper">
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-show="tamplateSiteCtrl.isAuthenticate()">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-show="indexCtrl.isAuthenticate()">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
@@ -233,7 +233,7 @@
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
                     <li class="divider"></li>
-                    <li><a href="#" ng-click="tamplateSiteCtrl.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="#" ng-click="indexCtrl.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user --></li>

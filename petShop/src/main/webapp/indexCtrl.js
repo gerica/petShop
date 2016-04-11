@@ -1,23 +1,28 @@
 petShoepApp.controller("indexController", [
-    '$log', '$http', function ($log, $http) {
-        $log.info("Iniciando indexController");
-        var self = this;
+		'$log', '$http', '$state', 'AuthenticationService', function($log, $http, $state, AuthenticationService) {
+			$log.info("Iniciando indexController");
+			var self = this;
 
-        self.containsPapel = function (papel) {
-            // $log.info("contains papel: " + papel);
-            if (self.usuario && self.usuario.tipoUsuario.tipoUsuarioPapels) {
-                for (i = 0; i < self.usuario.tipoUsuario.tipoUsuarioPapels.length; i++) {
-                    if (self.usuario.tipoUsuario.tipoUsuarioPapels[i].papel.dsPapel == papel) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        };
+			self.containsPapel = function(papel) {
+				return AuthenticationService.containsPapel(papel);
+			};
 
-        // self.addUserHeader = function() {
-        // $http.defaults.headers.common.Authorization = 'Basic ' +
-        // self.usuario.dsSenha;
-        // }
-    }
+			self.isAuthenticate = function() {
+				return AuthenticationService.isLoggedIn();
+			};
+
+			self.logout = function() {
+				$log.info("logout");
+				AuthenticationService.logout().success(function(data, status, headers, config) {
+					AuthenticationService.isLoggedIn();
+					$log.info("Logout com sucesso.");
+					AuthenticationService.setLoggedIn(false);
+					$state.go('login');
+
+				}).error(function(data, status, headers, config) {
+					console.log("erro-----------------");
+					console.log(data, status);
+				});
+			};
+		}
 ]);

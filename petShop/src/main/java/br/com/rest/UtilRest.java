@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.entidade.auxiliar.Raca;
 import br.com.entidade.auxiliar.TipoPet;
+import br.com.entidade.permissao.PapelEnum;
 import br.com.entidade.permissao.TipoUsuario;
 import br.com.service.UtilService;
 
@@ -33,7 +34,8 @@ public class UtilRest {
 	@GET
 	@Path(PATH_TIPO_PET_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<TipoPet> findAllTipoPet() {
 		return utilService.findAllTipoPet();
 	}
@@ -41,7 +43,8 @@ public class UtilRest {
 	@GET
 	@Path(PATH_RACA_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Raca> findAllRaca() {
 		return utilService.findAllRaca();
 	}
@@ -49,15 +52,17 @@ public class UtilRest {
 	@GET
 	@Path(PATH_RACA_REST_FIND_BY_TIPO)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Raca> findRacaByTipo(@QueryParam("valor") Integer idTipoPet) {
 		return utilService.findRacaByTipo(idTipoPet);
 	}
-	
+
 	@GET
 	@Path(PATH_RACA_REST_FIND_ALL_TIPO_USUARIO)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<TipoUsuario> findAllTipoUsuario() {
 		return utilService.findAllTipoUsuario();
 	}
