@@ -19,27 +19,18 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th ng-click="order = '-tipoPet.dsNome'; petCtrl.tipoOrderAsc=false;" ng-show="petCtrl.tipoOrderAsc">Tipo Pet <span class="fa  fa-sort-up"></span></th>
-								<th ng-click="order = 'tipoPet.dsNome'; petCtrl.tipoOrderAsc=true;" ng-show="!petCtrl.tipoOrderAsc">Tipo Pet <span class="fa fa-sort-desc"></span></th>
-								<th ng-click="order = '-dsNome'; petCtrl.tipoOrderAsc=false;" ng-show="petCtrl.tipoOrderAsc">Nome <span class="fa  fa-sort-up"></span></th>
-								<th ng-click="order = 'dsNome'; petCtrl.tipoOrderAsc=true;" ng-show="!petCtrl.tipoOrderAsc">Nome <span class="fa fa-sort-desc"></span></th>
-								<th ng-click="order = '-dtNacimento'; petCtrl.tipoOrderAsc=false;" ng-show="petCtrl.tipoOrderAsc">Data Nacimento <span class="fa  fa-sort-up"></span></th>
-								<th ng-click="order = 'dtNacimento'; petCtrl.tipoOrderAsc=true;" ng-show="!petCtrl.tipoOrderAsc">Data Nacimento <span class="fa fa-sort-desc"></span></th>
-								<th ng-click="order = '-cliente.dsNome'; petCtrl.tipoOrderAsc=false;" ng-show="petCtrl.tipoOrderAsc">Cliente <span class="fa  fa-sort-up"></span></th>
-								<th ng-click="order = 'cliente.dsNome'; petCtrl.tipoOrderAsc=true;" ng-show="!petCtrl.tipoOrderAsc">Cliente <span class="fa fa-sort-desc"></span></th>
-								<th ng-click="order = '-raca.dsNome'; petCtrl.tipoOrderAsc=false;" ng-show="petCtrl.tipoOrderAsc">Raça <span class="fa  fa-sort-up"></span></th>
-								<th ng-click="order = 'raca.dsNome'; petCtrl.tipoOrderAsc=true;" ng-show="!petCtrl.tipoOrderAsc">Raça <span class="fa fa-sort-desc"></span></th>
+								<th ng-click="order = '-tipoUsuario.dsTipoUsuario'; usuarioCtrl.tipoOrderAsc=false;" ng-show="usuarioCtrl.tipoOrderAsc">Tipo Pet <span class="fa  fa-sort-up"></span></th>
+								<th ng-click="order = 'tipoUsuario.dsTipoUsuario'; usuarioCtrl.tipoOrderAsc=true;" ng-show="!usuarioCtrl.tipoOrderAsc">Tipo Pet <span class="fa fa-sort-desc"></span></th>
+								<th ng-click="order = '-dsNome'; usuarioCtrl.tipoOrderAsc=false;" ng-show="usuarioCtrl.tipoOrderAsc">Nome <span class="fa  fa-sort-up"></span></th>
+								<th ng-click="order = 'dsNome'; usuarioCtrl.tipoOrderAsc=true;" ng-show="!usuarioCtrl.tipoOrderAsc">Nome <span class="fa fa-sort-desc"></span></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="pet in petsFiltrados = (petCtrl.pets | filter:petCtrl.sensitiveSearch | filter:petCtrl.figureOutTodosToDisplay |  orderBy:order)"
-								ng-click="petCtrl.selectObject(pet, $index)">
-								<td>{{ pet.id }}</td>
-								<td>{{ pet.tipoPet.dsNome }}</td>
-								<td>{{ pet.dsNome }}</td>
-								<td>{{ pet.dtNacimento | date:"longDate" }}</td>
-								<td>{{ pet.cliente.dsNome}} {{pet.cliente.dsSobreNome}}</td>
-								<td>{{ pet.raca.dsNome}}</td>
+							<tr ng-repeat="usuario in usuariosFiltrados = (usuarioCtrl.usuarios | filter:usuarioCtrl.sensitiveSearch | filter:usuarioCtrl.figureOutTodosToDisplay |  orderBy:order)"
+								ng-click="usuarioCtrl.selectObject(usuario, $index)">
+								<td>{{ usuario.idUsuario }}</td>
+								<td>{{ usuario.tipoUsuario.dsTipoUsuario }}</td>
+								<td>{{ usuario.dsNome }}</td>
 							</tr>
 							<tr ng-show="petsFiltrados == 0">
 								<td colspan="5">
@@ -50,8 +41,8 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="col-md-6 col-md-offset-4" ng-show="petsFiltrados != 0">
-						<uib-pagination boundary-links="true" total-items="petCtrl.pets.length" ng-model="petCtrl.currentPage" items-per-page="petCtrl.itemsPerPage"
+					<div class="col-md-6 col-md-offset-4" ng-show="usuariosFiltrados != 0">
+						<uib-pagination boundary-links="true" total-items="usuarioCtrl.pets.length" ng-model="usuarioCtrl.currentPage" items-per-page="usuarioCtrl.itemsPerPage"
 							class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 					</div>
 				</div>

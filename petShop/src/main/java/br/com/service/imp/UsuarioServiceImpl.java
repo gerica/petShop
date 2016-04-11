@@ -1,5 +1,7 @@
 package br.com.service.imp;
 
+import java.util.List;
+
 import org.glassfish.jersey.internal.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		System.out.println(new String(Base64.encode(userSenhaView.toString().getBytes())));
 		
 
+	}
+
+
+	@Override
+	public List<Usuario> findAllUsuario() {
+		return (List<Usuario>) usuarioRepository.findAll();
 	}
 
 }
