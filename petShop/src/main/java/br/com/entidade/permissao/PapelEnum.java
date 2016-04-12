@@ -22,7 +22,7 @@ public enum PapelEnum {
 		public static final String CONTABIL = "CONTABIL";
 		public static final String FISCAL = "FISCAL";
 		public static final String TOSARDOR = "TOSARDOR";
-		public static final String ENCARREGADO_ESTOQUE = "ENCARREGADO_ESTOQUE";
+		public static final String ENCARREGADO_ESTOQUE = "ENCARREGADO ESTOQUE";
 	}
 
 }

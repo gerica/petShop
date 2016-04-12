@@ -6,7 +6,9 @@ petShoepApp.factory("usuarioService", [
         };
 
         var _findAllUsuarios = function () {
-            return $http.get("/petShop/rest/usuarioRest/findAllUsuario");
+            return $http.get("/petShop/rest/usuarioRest/findAllUsuario",{
+                cache : false
+            });
         };
 
         var _incluirUsuario = function (usuario) {

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.entidade.permissao.PapelEnum;
 import br.com.entidade.permissao.Usuario;
-import br.com.entidade.sistema.Cliente;
 import br.com.service.UsuarioService;
 
 @Component
@@ -26,7 +25,6 @@ public class UsuarioRest {
 	public static final String PATH_USUARIO_REST = "usuarioRest";
 	private static final String PATH_USUARIO_REST_INCLUIR = "incluir";
 	private static final String PATH_USUARIO_REST_FIND_ALL_USER = "findAllUsuario";
-	
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -34,18 +32,16 @@ public class UsuarioRest {
 	@POST
 	@Path(PATH_USUARIO_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
-		PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
+	@RolesAllowed({ PapelEnum.Constants.GERENTE })
 	public Response incluir(Usuario usuario) {
 		usuarioService.incluir(usuario);
 		return Response.status(200).build();
 	}
-	
+
 	@GET
 	@Path(PATH_USUARIO_REST_FIND_ALL_USER)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
-			PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
+	@RolesAllowed({ PapelEnum.Constants.GERENTE })
 	public List<Usuario> findAllUsuario() {
 		return usuarioService.findAllUsuario();
 	}

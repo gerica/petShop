@@ -1,9 +1,10 @@
 petShoepApp.controller("usuarioController", [
-    '$scope', '$log', 'usuarioService', function ($scope, $log, usuarioService) {
+    '$scope', '$log','$uibModal', 'usuarioService', function ($scope, $log, $uibModal, usuarioService) {
         $log.info("Iniciando usuarioController");
         var self = this;
         self.usuario;
         self.tiposUsuario = [];
+        self.tipoUsuario;
         self.activeTabs = [
             true, false
         ];
@@ -87,7 +88,8 @@ petShoepApp.controller("usuarioController", [
 
         self.sensitiveSearch = function(usuario) {
             if (self.search) {
-                return usuario.dsNome.toUpperCase().indexOf(self.search.toUpperCase()) == 0;
+                return usuario.dsNome.toUpperCase().search(self.search.toUpperCase()) >= 0
+                    || usuario.tipoUsuario.dsTipoUsuario.toUpperCase().search(self.search.toUpperCase()) >= 0;
             }
             return true;
         };
@@ -102,5 +104,53 @@ petShoepApp.controller("usuarioController", [
         }
 
         self.findAllUsuarios();
+
+        // funcionalidade de modal
+        self.open = function(size, usuario) {
+
+            var modalInstance = $uibModal.open({
+                animation : self.animationsEnabled,
+                templateUrl : '/petShop/usuario/modalDetalhe.html',
+                controller : 'modalDetalheUsuarioController as ctrl',
+                size : size,
+                resolve : {
+                    usuario : function() {
+                        return usuario;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(objResponse) {
+                self.usuario = objResponse;
+
+                /*self.tipoUsuario = {
+                    cliente : self.pet.cliente,
+                    nomeCompleto : self.pet.cliente.dsNome + ' ' + self.pet.cliente.dsSobreNome,
+                };*/
+
+                self.activeTabs = [
+                    true, false
+                ];
+
+            }, function() {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+    }
+]);
+
+
+petShoepApp.controller('modalDetalheUsuarioController', [
+    '$uibModalInstance', '$log', 'usuario', function($uibModalInstance, $log, usuario) {
+        var self = this;
+        self.usuario = usuario;
+
+        self.selecionar = function() {
+            $uibModalInstance.close(self.usuario);
+        };
+
+        self.cancel = function() {
+            $uibModalInstance.dismiss('cancel');
+        };
     }
 ]);

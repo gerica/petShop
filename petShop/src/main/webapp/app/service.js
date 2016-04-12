@@ -142,14 +142,16 @@ petShoepApp.factory('AuthenticationService', [
 				$http.defaults.headers.common.Authorization = 'Basic ';
 			};
 
-			var _containsPapel = function(papel) {
+			var _containsPapel = function(papeis) {
 				if ($rootScope.globals != undefined) {
 
 					var usuario = $rootScope.globals.currentUser.user;
 					if (usuario && usuario.tipoUsuario.tipoUsuarioPapels) {
 						for (i = 0; i < usuario.tipoUsuario.tipoUsuarioPapels.length; i++) {
-							if (usuario.tipoUsuario.tipoUsuarioPapels[i].papel.dsPapel == papel) {
-								return true;
+							for (x = 0; x < papeis.length; x++) {
+								if (usuario.tipoUsuario.tipoUsuarioPapels[i].papel.dsPapel == papeis[x]) {
+									return true;
+								}
 							}
 						}
 					}

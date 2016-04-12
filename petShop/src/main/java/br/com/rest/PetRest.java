@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.entidade.permissao.PapelEnum;
 import br.com.entidade.sistema.Pet;
 import br.com.service.PetService;
 
@@ -38,7 +39,8 @@ public class PetRest {
 	@POST
 	@Path(PATH_PET_REST_INCLUIR)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+		PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public Response incluir(Pet pet) {
 		logger.info("PetRest.incluir()");
 		petService.incluir(pet);
@@ -48,7 +50,8 @@ public class PetRest {
 	@GET
 	@Path(PATH_PET_REST_FIND_ALL)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+		PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Pet> findAll() {
 		return petService.findAll();
 	}
@@ -56,7 +59,8 @@ public class PetRest {
 	@GET
 	@Path(PATH_PET_REST_FIND_PET_BY_CLIENTE)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+		PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Pet> findPetByCliente(@QueryParam("valor") Integer idCliente) {
 		return petService.findPetByCliente(idCliente);
 	}
@@ -64,7 +68,8 @@ public class PetRest {
 	@GET
 	@Path(PATH_PET_REST_FIND_PET_BY_DS_NOME)
 	@Produces(MediaType.APPLICATION_JSON)
-	@RolesAllowed("GERENTE")
+	@RolesAllowed({ PapelEnum.Constants.GERENTE, PapelEnum.Constants.VENDAS, PapelEnum.Constants.COMPRAS, PapelEnum.Constants.VETERINARIO,
+		PapelEnum.Constants.CONTABIL, PapelEnum.Constants.FISCAL, PapelEnum.Constants.TOSARDOR, PapelEnum.Constants.ENCARREGADO_ESTOQUE })
 	public List<Pet> findPetByDsNome(@QueryParam("valor") String valor) {
 		return petService.findPetByDsNome(valor);
 	}

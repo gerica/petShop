@@ -1,15 +1,19 @@
 petShoepApp.controller("indexController", [
-		'$log', '$http', '$state', 'AuthenticationService', function($log, $http, $state, AuthenticationService) {
+		'$log', '$http', '$state', 'AuthenticationService','$rootScope', function($log, $http, $state, AuthenticationService,$rootScope) {
 			$log.info("Iniciando indexController");
 			var self = this;
 
-			self.containsPapel = function(papel) {
-				return AuthenticationService.containsPapel(papel);
+			self.containsPapel = function(papeis) {
+				return AuthenticationService.containsPapel(papeis);
 			};
 
 			self.isAuthenticate = function() {
 				return AuthenticationService.isLoggedIn();
 			};
+
+			self.getNomeUsuario = function(){
+				return $rootScope.globals.currentUser.user.dsNome;
+			}
 
 			self.logout = function() {
 				$log.info("logout");

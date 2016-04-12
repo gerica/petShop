@@ -231,7 +231,7 @@
                     class="fa fa-caret-down"></i>
             </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> {{indexCtrl.getNomeUsuario()}}</a></li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
                     <li class="divider"></li>
                     <li><a href="#" ng-click="indexCtrl.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -257,7 +257,7 @@
                         <!-- /input-group -->
                     </li>
                     <li><a ui-sref="petShop"><i class="fa fa-dashboard fa-fw"></i> Painel Central</a></li>
-                    <li ng-show="indexCtrl.containsPapel('GERENTE')"><a href="#"><i
+                    <li ng-show="indexCtrl.containsPapel(['GERENTE'])"><a href="#"><i
                             class="glyphicon glyphicon-wrench"></i> Administração<span
                             class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -274,7 +274,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#"><i class="fa fa-medkit"></i> Veterinária<span class="fa arrow"></span></a>
+                    <li ng-show="indexCtrl.containsPapel(['VETERINARIO','GERENTE'])"><a href="#"><i class="fa fa-medkit"></i> Veterinária<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a ui-sref="veterinario_consulta">Consulta</a>
                             </li>
