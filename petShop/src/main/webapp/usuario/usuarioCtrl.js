@@ -4,7 +4,6 @@ petShoepApp.controller("usuarioController", [
         var self = this;
         self.usuario;
         self.tiposUsuario = [];
-        self.tipoUsuario;
         self.activeTabs = [
             true, false
         ];

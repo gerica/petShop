@@ -11,7 +11,7 @@
                          ng-class="{'has-error': usuarioCtrl.formUser.tipoUsuario.$dirty && usuarioCtrl.formUser.tipoUsuario.$invalid}">
                         <label ng-class="{'control-label': usuarioCtrl.formUser.tipoUsuario.$dirty && usuarioCtrl.formUser.tipoUsuario.$invalid}">Cargo:</label><br>
                         <select name="tipoUsuario" id="tipoUsuarioSelect"
-                                ng-options="tipo.dsTipoUsuario for tipo in usuarioCtrl.tiposUsuario"
+                                ng-options="tipo.dsTipoUsuario for tipo in usuarioCtrl.tiposUsuario track by tipo.idTipoUsuario"
                                 ng-model="usuarioCtrl.usuario.tipoUsuario">
                         </select>
                     </div>

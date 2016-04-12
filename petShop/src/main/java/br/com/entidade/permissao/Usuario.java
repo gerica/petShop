@@ -46,7 +46,7 @@ public class Usuario implements Serializable, UserDetails {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_tipo_usuario")
 	private TipoUsuario tipoUsuario;
-	
+
 	/* Spring Security fields */
 	@Transient
 	private List<Role> authorities;
@@ -58,6 +58,12 @@ public class Usuario implements Serializable, UserDetails {
 	private boolean credentialsNonExpired = true;
 	@Transient
 	private boolean enabled = true;
+
+	@Transient
+	private String username;
+
+	@Transient
+	private String password;
 
 	public Usuario() {
 	}
@@ -92,6 +98,7 @@ public class Usuario implements Serializable, UserDetails {
 
 	public void setDsNome(String dsNome) {
 		this.dsNome = dsNome;
+		this.username = this.dsNome;
 	}
 
 	public String getDsSenha() {
@@ -100,6 +107,7 @@ public class Usuario implements Serializable, UserDetails {
 
 	public void setDsSenha(String dsSenha) {
 		this.dsSenha = dsSenha;
+		this.password = this.dsSenha;
 	}
 
 	public TipoUsuario getTipoUsuario() {
@@ -109,9 +117,6 @@ public class Usuario implements Serializable, UserDetails {
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
-	
-	
 
 	@Override
 	public String toString() {
@@ -159,16 +164,20 @@ public class Usuario implements Serializable, UserDetails {
 		this.enabled = enabled;
 	}
 
-	@Override
-	public String getPassword() {
-		return getDsSenha();
-	}
-
-	@Override
 	public String getUsername() {
-		return getDsNome();
+		return username;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }
