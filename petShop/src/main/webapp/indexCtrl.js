@@ -12,7 +12,9 @@ petShoepApp.controller("indexController", [
 			};
 
 			self.getNomeUsuario = function(){
-				return $rootScope.globals.currentUser.user.dsNome;
+				if($rootScope.globals != undefined && $rootScope.globals.currentUser != undefined){
+					return $rootScope.globals.currentUser.user.dsNome;
+				}
 			}
 
 			self.logout = function() {

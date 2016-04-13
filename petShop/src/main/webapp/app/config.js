@@ -60,9 +60,9 @@ petShoepApp.config(function($stateProvider, $urlRouterProvider, $logProvider) {
 			data : {requireLogin : true },
 		})
 		// VIEWS VETERINARIA========================================
-		.state('veterinario_consulta', {
-			url: '/veterinario_consulta',
-			templateUrl: 'veterinaria/consulta/form.html',
+		.state('veterinario', {
+			url: '/veterinario',
+			templateUrl: 'veterinaria/form.html',
 			data : {requireLogin : true },
 		})
 

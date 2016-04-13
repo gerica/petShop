@@ -1,0 +1,20 @@
+<div id="page-wrapper" ng-controller="veterinariaCtrl as vetCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Veterinária</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="tab-content">
+        <uib-tabset>
+            <uib-tab index="0" heading="Cadastro" active="vetCtrl.activeTabs[0]">
+                <div ng-include="vetCtrl.pages.consulta"></div>
+            </uib-tab>
+            <uib-tab index="1" active="vetCtrl.activeTabs[1]" heading="Vacina" ng-show="vetCtrl.pet">
+                <div ng-include="vetCtrl.pages.vacina"></div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+
+</div>
+<!-- /#page-wrapper -->
